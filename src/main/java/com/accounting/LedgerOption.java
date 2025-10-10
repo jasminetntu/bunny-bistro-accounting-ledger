@@ -42,7 +42,6 @@ public enum LedgerOption {
         }
 
         // if no match is found, throw an exception
-        throw new IllegalArgumentException("Invalid menu choice: " + inputLetter
-                + ". Please enter A, D, P, R, or H.");
+        throw new IllegalArgumentException();
     }
 }

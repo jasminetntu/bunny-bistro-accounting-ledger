@@ -40,7 +40,6 @@ public enum ReportOption {
         }
 
         // if no match is found, throw an exception
-        throw new IllegalArgumentException("Invalid menu choice: " + inputNum
-                + ". Please enter A, D, P, R, or H.");
+        throw new IllegalArgumentException();
     }
 }

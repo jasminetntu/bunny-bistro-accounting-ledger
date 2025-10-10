@@ -39,8 +39,7 @@ public enum HomeOption {
             }
         }
 
-        // if no match is found, throw an exception
-        throw new IllegalArgumentException("Invalid menu choice: " + inputLetter
-                + ". Please enter D, P, L, or X.");
+        // if no match is found, return null
+        throw new IllegalArgumentException();
     }
 }

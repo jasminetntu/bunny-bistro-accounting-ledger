@@ -5,11 +5,12 @@ public class Main {
         // bold beginning & end
         String ANSI_BOLD = "\u001B[1m";
         String ANSI_RESET = "\u001B[0m";
+
         //title
         System.out.println(ANSI_BOLD + "•··· Bunny Bistro 🍵ིྀ༘" + ANSI_RESET + "₍ᐢ. .ᐢ₎₊˚⊹");
         System.out.println("•··· Sales & Purchases");
 
-        Menu.showHome();
-
+        //enter home screen
+        HomeScreen.showHome();
     }
 }
