@@ -7,6 +7,7 @@ public class Menu {
     public static void showHome() {
         Scanner scnr = new Scanner(System.in);
         boolean isRunning = true;
+        HomeOption homeChoice;
 
         while (isRunning) {
             System.out.print("""
@@ -18,8 +19,23 @@ public class Menu {
                         (X) Exit
                     Enter choice (D, P, L, X):\s""");
 
-            MenuOption.Home homeChoice = MenuOption.Home.valueOf(scnr.nextLine().trim().toUpperCase());
+            try {
+                homeChoice = HomeOption.fromInputLetter(scnr.nextLine());
+            }
+            catch (Exception e) {
+                System.out.println(e.toString());
+            }
 
+            switch (homeChoice) {
+                case ADD_DEPOSIT ->
+                case MAKE_PAYMENT ->
+                case LEDGER ->
+                case EXIT -> {
+                    System.out.println("Goodbye!");
+                }
+                default:
+                    System.out.println("Invalid input. Please try again.");
+            }
 
         }
 
