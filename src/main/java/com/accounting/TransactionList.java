@@ -11,8 +11,10 @@ public class TransactionList {
 
     // *** GENERAL METHODS ***
 
-    public void addTransaction() {
-
+    public void addTransaction(String description, String vendor, double amount) {
+        Transaction t = new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount);
+        transactions.add(t);
+        System.out.println("The following transaction has been added: " + t);
     }
 
     // *** FILE I/O METHODS ***

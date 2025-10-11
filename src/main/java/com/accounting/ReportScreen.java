@@ -4,14 +4,17 @@ import java.util.Scanner;
 
 public class ReportScreen {
     public static void showReport(Scanner scnr) {
+        final String BOLD_START = "\u001B[1m";
+        final String BOLD_END = "\u001B[0m";
+
         boolean isRunning = true;
         ReportOption reportChoice = null;
 
         while (isRunning) {
-            System.out.print("""
+            System.out.printf("""
                     
                     •·················•·················•
-                                   Reports
+                                   %sReports%s
                     •·················•·················•
                     Run report from...
                         (1) Month To Date
@@ -22,7 +25,7 @@ public class ReportScreen {
                         (6) Custom Search --> DO LAST (OPTIONAL)
                     
                         (0) Back to Ledger
-                    > Enter choice (0-6):\s""");
+                    > Enter choice (0-6):\s""", BOLD_START, BOLD_END);
 
             try {
                 reportChoice = ReportOption.fromInputNum(Integer.parseInt(scnr.nextLine()));

@@ -4,14 +4,17 @@ import java.util.Scanner;
 
 public class LedgerScreen {
     public static void showLedger(Scanner scnr) {
+        final String BOLD_START = "\u001B[1m";
+        final String BOLD_END = "\u001B[0m";
+
         boolean isRunning = true;
         LedgerOption ledgerChoice = null;
 
         while (isRunning) {
-            System.out.print("""
+            System.out.printf("""
                     
                     •·················•·················•
-                                    Ledger
+                                    %sLedger%s
                     •·················•·················•
                     Display...
                         (A) All Transactions
@@ -20,7 +23,7 @@ public class LedgerScreen {
                         (R) Reports
                     
                         (H) Back to Home
-                    > Enter choice (A, D, P, R, H):\s""");
+                    > Enter choice (A, D, P, R, H):\s""", BOLD_START, BOLD_END);
 
             try {
                 ledgerChoice = LedgerOption.fromInputLetter(scnr.nextLine());
