@@ -19,7 +19,7 @@ public class ReportScreen {
                         (3) Year To Date
                         (4) Previous Year
                         (5) Search by Vendor
-                        (6) Custom Search
+                        (6) Custom Search --> DO LAST (OPTIONAL)
                     
                         (0) Back to Ledger
                     > Enter choice (0-6):\s""");

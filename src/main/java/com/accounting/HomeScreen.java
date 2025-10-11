@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class HomeScreen {
     public static void showHome() {
         Scanner scnr = new Scanner(System.in);
+        TransactionList transactionList = new TransactionList();
+        transactionList.loadFromCsv("src/main/resources/transactions.csv");
+
         boolean isRunning = true;
         HomeOption homeChoice = null;
 
@@ -32,6 +35,7 @@ public class HomeScreen {
                     case LEDGER -> LedgerScreen.showLedger(scnr);
                     case EXIT -> {
                         System.out.println("\n•··· Goodbye! ···•");
+                        transactionList.saveToCsv("src/main/resources/transactions.csv");
                         isRunning = false;
                         scnr.close();
                     }
@@ -45,7 +49,8 @@ public class HomeScreen {
     }
 
     private static void addDeposit() {
-        System.out.println("TEST: addDeposit() entered");
+        //System.out.println("TEST: addDeposit() entered");
+
     }
 
     private static void makePayment() {
