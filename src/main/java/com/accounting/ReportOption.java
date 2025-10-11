@@ -1,8 +1,8 @@
 package com.accounting;
 
 public enum ReportOption {
-    MONTH_TO_DATE(1), PREVIOUS_MONTH(2), YEAR_TO_DATE(3),
-    PREVIOUS_YEAR(4), SEARCH_BY_VENDOR(5), BACK_LEDGER(0);
+    MONTH_TO_DATE(1), PREVIOUS_MONTH(2), YEAR_TO_DATE(3), PREVIOUS_YEAR(4),
+    SEARCH_BY_VENDOR(5), CUSTOM_SEARCH(6), BACK_LEDGER(0);
 
     private final int num;
 

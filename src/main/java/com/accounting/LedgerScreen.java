@@ -13,13 +13,14 @@ public class LedgerScreen {
                     •·················•·················•
                                     Ledger
                     •·················•·················•
-                    > Display...
+                    Display...
                         (A) All Transactions
                         (D) Deposits
                         (P) Payments
                         (R) Reports
+                    
                         (H) Back to Home
-                    Enter choice (A, D, P, R, H):\s""");
+                    > Enter choice (A, D, P, R, H):\s""");
 
             try {
                 ledgerChoice = LedgerOption.fromInputLetter(scnr.nextLine());

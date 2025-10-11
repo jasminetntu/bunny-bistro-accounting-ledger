@@ -14,12 +14,13 @@ public class HomeScreen {
                     •·················•·················•
                                     Home
                     •·················•·················•
-                    > What would you like to do?
+                    What would you like to do?
                         (D) Add Deposit
                         (P) Make Payment (Debit)
                         (L) View Ledger
+                    
                         (X) Exit
-                    Enter choice (D, P, L, X):\s""");
+                    > Enter choice (D, P, L, X):\s""");
 
             try {
                 homeChoice = HomeOption.fromInputLetter(scnr.nextLine());
