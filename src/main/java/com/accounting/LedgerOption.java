@@ -1,11 +1,10 @@
 package com.accounting;
 
 public enum LedgerOption {
-    DISPLAY_ALL("A"), DISPLAY("D"), DISPLAY_PAYMENTS("P"),
+    DISPLAY_ALL("A"), DISPLAY_DEPOSITS("D"), DISPLAY_PAYMENTS("P"),
     DISPLAY_REPORTS("R"), BACK_HOME("H");
 
     private final String letter;
-
 
     /**
      * Constructor for LedgerOption enum

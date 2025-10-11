@@ -10,26 +10,30 @@ public class HomeScreen {
 
         while (isRunning) {
             System.out.print("""
-                    \n•·················•·················•
-                    What would you like to do?
+                    
+                    •·················•·················•
+                                    Home
+                    •·················•·················•
+                    > What would you like to do?
                         (D) Add Deposit
                         (P) Make Payment (Debit)
-                        (L) Ledger
+                        (L) View Ledger
                         (X) Exit
                     Enter choice (D, P, L, X):\s""");
 
             try {
                 homeChoice = HomeOption.fromInputLetter(scnr.nextLine());
 
+                //only proceeds to switch if input is valid
                 switch (homeChoice) {
                     case ADD_DEPOSIT -> addDeposit();
                     case MAKE_PAYMENT -> makePayment();
-                    case LEDGER -> LedgerScreen.showLedger();
+                    case LEDGER -> LedgerScreen.showLedger(scnr);
                     case EXIT -> {
                         System.out.println("\n•··· Goodbye! ···•");
                         isRunning = false;
+                        scnr.close();
                     }
-                    default -> System.out.println("Invalid input. Please try again.");
                 }
             }
             catch (IllegalArgumentException e) {
@@ -40,10 +44,10 @@ public class HomeScreen {
     }
 
     private static void addDeposit() {
-        System.out.println("TEST: Add deposit entered");
+        System.out.println("TEST: addDeposit() entered");
     }
 
     private static void makePayment() {
-        System.out.println("TEST: Make payment entered");
+        System.out.println("TEST: makePayment() entered");
     }
 }
