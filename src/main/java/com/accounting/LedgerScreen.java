@@ -30,9 +30,9 @@ public class LedgerScreen {
 
                 //only proceeds to switch if input is valid
                 switch (ledgerChoice) {
-                    case DISPLAY_ALL -> displayAll(transactionList);
-                    case DISPLAY_DEPOSITS -> displayDeposits();
-                    case DISPLAY_PAYMENTS -> displayPayments();
+                    case DISPLAY_ALL -> transactionList.displayAll();
+                    case DISPLAY_DEPOSITS -> transactionList.displayAllDeposits();
+                    case DISPLAY_PAYMENTS -> transactionList.displayAllPayments();
                     case DISPLAY_REPORTS -> ReportScreen.showReport(scnr);
                     case BACK_HOME -> {
                         System.out.println("\n•··· Returning to home... ···•");
@@ -47,18 +47,18 @@ public class LedgerScreen {
 
     }
 
-    private static void displayAll(TransactionList transactionList) {
-        //System.out.println("TEST: displayAll() entered");
-        transactionList.displayAll();
-    }
+    // *** TEST METHODS ***
 
-    private static void displayDeposits() {
-        System.out.println("TEST: displayDeposits() entered");
-    }
-
-    private static void displayPayments() {
-        System.out.println("TEST: displayPayments() entered");
-    }
-
+//    private static void displayAll(TransactionList transactionList) {
+//        System.out.println("TEST: displayAll() entered");
+//    }
+//
+//    private static void displayDeposits() {
+//        System.out.println("TEST: displayDeposits() entered");
+//    }
+//
+//    private static void displayPayments() {
+//        System.out.println("TEST: displayPayments() entered");
+//    }
 
 }

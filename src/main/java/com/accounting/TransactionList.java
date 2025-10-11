@@ -55,11 +55,39 @@ public class TransactionList {
     // *** PRINTING METHODS ***
 
     public void displayAll() {
-        System.out.println("•··· All Transactions (Most to Least Recent) ···•");
+        System.out.println("\n•··· All Transactions (Most to Least Recent) ···•");
 
         transactions.stream()
                 .sorted(new Comparator<Transaction>() {
                     //sort based on most recent
+                    @Override
+                    public int compare(Transaction t1, Transaction t2) {
+                        return -1 * t1.getDateAndTime().compareTo(t2.getDateAndTime());
+                    }
+                })
+                .forEach(t -> System.out.println("> " + t));
+    }
+
+    public void displayAllDeposits() {
+        System.out.println("\n•··· All Deposits (Most to Least Recent) ···•");
+
+        transactions.stream()
+                .filter(t -> t.getAmount() > 0) //ensures only positive amounts
+                .sorted(new Comparator<Transaction>() { //sort based on most recent
+                    @Override
+                    public int compare(Transaction t1, Transaction t2) {
+                        return -1 * t1.getDateAndTime().compareTo(t2.getDateAndTime());
+                    }
+                })
+                .forEach(t -> System.out.println("> " + t));
+    }
+
+    public void displayAllPayments() {
+        System.out.println("\n•··· All Payments (Most to Least Recent) ···•");
+
+        transactions.stream()
+                .filter(t -> t.getAmount() < 0) //ensures only negative amounts
+                .sorted(new Comparator<Transaction>() { //sort based on most recent
                     @Override
                     public int compare(Transaction t1, Transaction t2) {
                         return -1 * t1.getDateAndTime().compareTo(t2.getDateAndTime());
