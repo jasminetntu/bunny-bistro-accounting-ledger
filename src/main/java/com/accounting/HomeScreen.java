@@ -42,7 +42,7 @@ public class HomeScreen {
                 switch (homeChoice) {
                     case ADD_DEPOSIT -> addDeposit(scnr, transactionList);
                     case MAKE_PAYMENT -> makePayment(scnr, transactionList);
-                    case LEDGER -> LedgerScreen.showLedger(scnr);
+                    case LEDGER -> LedgerScreen.showLedger(scnr, transactionList);
                     case EXIT -> {
                         System.out.println("\n•··· Goodbye! ···•");
                         transactionList.saveToCsv(FILE_PATH);

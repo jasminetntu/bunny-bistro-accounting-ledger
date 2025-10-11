@@ -1,21 +1,20 @@
 package com.accounting;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Transaction {
-    private LocalDate date;
-    private LocalTime time;
+    private LocalDateTime dateAndTime;
     private String description;
     private String vendor;
     private double amount;
 
     // *** CONSTRUCTORS ***
 
-    public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
-        this.date = date;
-        this.time = time;
+    public Transaction(LocalDateTime dateAndTime, String description, String vendor, double amount) {
+        this.dateAndTime = dateAndTime;
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;
@@ -23,12 +22,17 @@ public class Transaction {
 
     // *** GETTERS ***
 
+
+    public LocalDateTime getDateAndTime() {
+        return dateAndTime;
+    }
+
     public LocalDate getDate() {
-        return date;
+        return dateAndTime.toLocalDate();
     }
 
     public LocalTime getTime() {
-        return time;
+        return dateAndTime.toLocalTime();
     }
 
     public String getDescription() {
@@ -45,12 +49,8 @@ public class Transaction {
 
     // *** SETTERS ***
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
+    public void setDateAndTime(LocalDateTime dateAndTime) {
+        this.dateAndTime = dateAndTime;
     }
 
     public void setDescription(String description) {
@@ -68,18 +68,46 @@ public class Transaction {
     // *** OTHER ***
 
     /**
-     * Returns a string in the following format: date|time|description|vendor|amount
-     * @return a string of the transaction details
+     * Returns a string in the following format:
+     * {MMM dd, yyyy} | {hh:mm:ss a}
+     *      Description: {description}
+     *      Vendor: {vendor}
+     *      Amount: +/-${amount}
+     *
+     * @return an expanded string of the transaction details
      */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy | hh:mm:ss a");
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        sb.append(formatter.format(date)).append("|");
+        //append in 12-hour time for user readability
+        sb.append(formatter.format(dateAndTime))
+                .append("\n\tDescription: ").append(description)
+                .append("\n\tVendor: ").append(vendor);
 
-        formatter = DateTimeFormatter.ofPattern("hh:mm:ss");
-        sb.append(formatter.format(time)).append("|").append(description).append("|")
+        //append amount based on deposit or payment
+        if (amount < 0) { //payment
+            sb.append(String.format("\n\tAmount: -$%.2f", amount * -1));
+        }
+        else { //deposit
+            sb.append(String.format("\n\tAmount: +$%.2f", amount));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Returns a string in the following format for CSV file:
+     * date|time|description|vendor|amount
+     *
+     * @return a string of the transaction details
+     */
+    public String toCsvString() {
+        StringBuilder sb = new StringBuilder();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
+
+        //append in 24-hour time for clarity when reading file
+        sb.append(formatter.format(dateAndTime)).append("|").append(description).append("|")
                 .append(vendor).append(String.format("|%.2f", amount));
 
         return sb.toString();

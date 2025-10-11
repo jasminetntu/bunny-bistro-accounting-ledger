@@ -3,7 +3,7 @@ package com.accounting;
 import java.util.Scanner;
 
 public class LedgerScreen {
-    public static void showLedger(Scanner scnr) {
+    public static void showLedger(Scanner scnr, TransactionList transactionList) {
         final String BOLD_START = "\u001B[1m";
         final String BOLD_END = "\u001B[0m";
 
@@ -30,7 +30,7 @@ public class LedgerScreen {
 
                 //only proceeds to switch if input is valid
                 switch (ledgerChoice) {
-                    case DISPLAY_ALL -> displayAll();
+                    case DISPLAY_ALL -> displayAll(transactionList);
                     case DISPLAY_DEPOSITS -> displayDeposits();
                     case DISPLAY_PAYMENTS -> displayPayments();
                     case DISPLAY_REPORTS -> ReportScreen.showReport(scnr);
@@ -47,8 +47,9 @@ public class LedgerScreen {
 
     }
 
-    private static void displayAll() {
-        System.out.println("TEST: displayAll() entered");
+    private static void displayAll(TransactionList transactionList) {
+        //System.out.println("TEST: displayAll() entered");
+        transactionList.displayAll();
     }
 
     private static void displayDeposits() {
