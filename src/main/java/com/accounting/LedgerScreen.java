@@ -33,7 +33,7 @@ public class LedgerScreen {
                     case DISPLAY_ALL -> transactionList.displayAll();
                     case DISPLAY_DEPOSITS -> transactionList.displayAllDeposits();
                     case DISPLAY_PAYMENTS -> transactionList.displayAllPayments();
-                    case DISPLAY_REPORTS -> ReportScreen.showReport(scnr);
+                    case DISPLAY_REPORTS -> ReportScreen.showReport(scnr, transactionList);
                     case BACK_HOME -> {
                         System.out.println("\n•··· Returning to home... ···•");
                         isRunning = false;

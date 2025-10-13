@@ -9,6 +9,13 @@ import java.util.*;
 public class TransactionList {
     private final List<Transaction> transactions = new ArrayList<>();
 
+    private static final Comparator<Transaction> SORT_BY_MOST_RECENT = new Comparator<Transaction>() {
+        @Override
+        public int compare(Transaction t1, Transaction t2) {
+            return -1 * t1.getDateAndTime().compareTo(t2.getDateAndTime());
+        }
+    };
+
     // *** GENERAL METHODS ***
 
     public void addTransaction(String description, String vendor, double amount) {
@@ -52,48 +59,69 @@ public class TransactionList {
         }
     }
 
-    // *** PRINTING METHODS ***
+    // *** DISPLAY METHODS ***
+
+
 
     public void displayAll() {
-        System.out.println("\n•··· All Transactions (Most to Least Recent) ···•");
+        System.out.println("\n•··· All Transactions ···•");
 
         transactions.stream()
-                .sorted(new Comparator<Transaction>() {
-                    //sort based on most recent
-                    @Override
-                    public int compare(Transaction t1, Transaction t2) {
-                        return -1 * t1.getDateAndTime().compareTo(t2.getDateAndTime());
-                    }
-                })
+                .sorted(SORT_BY_MOST_RECENT)
                 .forEach(t -> System.out.println("> " + t));
     }
 
     public void displayAllDeposits() {
-        System.out.println("\n•··· All Deposits (Most to Least Recent) ···•");
+        System.out.println("\n•··· All Deposits ···•");
 
         transactions.stream()
                 .filter(t -> t.getAmount() > 0) //ensures only positive amounts
-                .sorted(new Comparator<Transaction>() { //sort based on most recent
-                    @Override
-                    public int compare(Transaction t1, Transaction t2) {
-                        return -1 * t1.getDateAndTime().compareTo(t2.getDateAndTime());
-                    }
-                })
+                .sorted(SORT_BY_MOST_RECENT)
                 .forEach(t -> System.out.println("> " + t));
     }
 
     public void displayAllPayments() {
-        System.out.println("\n•··· All Payments (Most to Least Recent) ···•");
+        System.out.println("\n•··· All Payments ···•");
 
         transactions.stream()
                 .filter(t -> t.getAmount() < 0) //ensures only negative amounts
-                .sorted(new Comparator<Transaction>() { //sort based on most recent
-                    @Override
-                    public int compare(Transaction t1, Transaction t2) {
-                        return -1 * t1.getDateAndTime().compareTo(t2.getDateAndTime());
-                    }
-                })
+                .sorted(SORT_BY_MOST_RECENT)
                 .forEach(t -> System.out.println("> " + t));
+    }
+
+    // *** REPORT METHODS ***
+
+    public void reportMonthToDate() {
+        // System.out.println("TEST: reportMonthToDate() entered");
+        System.out.println("\n•··· Month To Date Report ···•");
+
+        LocalDate first_day_of_month = LocalDate.now().withDayOfMonth(1);
+        transactions.stream()
+                //filters for transaction dates >= first day of current month
+                .filter(t -> t.getDate().isAfter(first_day_of_month) || t.getDate().isEqual(first_day_of_month))
+                .sorted(SORT_BY_MOST_RECENT)
+                .forEach(t -> System.out.println("> " + t));
+    }
+
+    public void reportPreviousMonth() {
+        //System.out.println("TEST: reportPreviousMonth() entered");
+        System.out.println("\n•··· Previous Month Report ···•");
+    }
+
+    public void reportYearToDate() {
+        System.out.println("TEST: reportYearToDate() entered");
+    }
+
+    public void reportPreviousYear() {
+        System.out.println("TEST: reportPreviousYear() entered");
+    }
+
+    public void searchByVendor() {
+        System.out.println("TEST: searchByVendor() entered");
+    }
+
+    public void customSearch() {
+        System.out.println("TEST: customSearch() entered");
     }
 
 }

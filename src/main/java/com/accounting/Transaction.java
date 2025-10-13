@@ -22,7 +22,6 @@ public class Transaction {
 
     // *** GETTERS ***
 
-
     public LocalDateTime getDateAndTime() {
         return dateAndTime;
     }
