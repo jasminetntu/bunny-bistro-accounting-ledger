@@ -97,7 +97,7 @@ public class TransactionList {
 
         LocalDate first_day_of_month = LocalDate.now().withDayOfMonth(1);
         transactions.stream()
-                //filters for transaction dates >= first day of current month
+                //filters based on: curr month/01/curr year <= date
                 .filter(t -> !t.getDate().isBefore(first_day_of_month))
                 .sorted(SORT_BY_MOST_RECENT)
                 .forEach(t -> System.out.println("> " + t));
@@ -111,6 +111,7 @@ public class TransactionList {
         LocalDate first_day_of_prev_month = LocalDate.now().withDayOfMonth(1).minusMonths(1);
 
         transactions.stream()
+                //filters based on: prev month/01 <= date < curr month/01 (curr year)
                 .filter(t -> t.getDate().isBefore(first_day_of_curr_month)
                         && !t.getDate().isBefore(first_day_of_prev_month))
                 .sorted(SORT_BY_MOST_RECENT)
@@ -124,6 +125,7 @@ public class TransactionList {
         LocalDate first_day_of_curr_year = LocalDate.of(LocalDate.now().getYear(), 1, 1);
 
         transactions.stream()
+                //filters based on: 01/01/curr year <= date
                 .filter(t -> !t.getDate().isBefore(first_day_of_curr_year))
                 .sorted(SORT_BY_MOST_RECENT)
                 .forEach(t -> System.out.println("> " + t));
@@ -137,6 +139,7 @@ public class TransactionList {
         LocalDate last_day_of_prev_year = LocalDate.of(LocalDate.now().getYear() - 1, 1, 31);
 
         transactions.stream()
+                //filters based on: 01/01/prev year <= date <= 12/31/prev year
                 .filter(t -> !t.getDate().isAfter(last_day_of_prev_year)
                         && !t.getDate().isBefore(first_day_of_prev_year))
                 .sorted(SORT_BY_MOST_RECENT)
