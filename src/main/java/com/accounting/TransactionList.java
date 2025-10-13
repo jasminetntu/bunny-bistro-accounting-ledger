@@ -98,7 +98,7 @@ public class TransactionList {
         LocalDate first_day_of_month = LocalDate.now().withDayOfMonth(1);
         transactions.stream()
                 //filters for transaction dates >= first day of current month
-                .filter(t -> t.getDate().isAfter(first_day_of_month) || t.getDate().isEqual(first_day_of_month))
+                .filter(t -> !t.getDate().isBefore(first_day_of_month))
                 .sorted(SORT_BY_MOST_RECENT)
                 .forEach(t -> System.out.println("> " + t));
     }
@@ -106,14 +106,41 @@ public class TransactionList {
     public void reportPreviousMonth() {
         //System.out.println("TEST: reportPreviousMonth() entered");
         System.out.println("\n•··· Previous Month Report ···•");
+
+        LocalDate first_day_of_curr_month = LocalDate.now().withDayOfMonth(1);
+        LocalDate first_day_of_prev_month = LocalDate.now().withDayOfMonth(1).minusMonths(1);
+
+        transactions.stream()
+                .filter(t -> t.getDate().isBefore(first_day_of_curr_month)
+                        && !t.getDate().isBefore(first_day_of_prev_month))
+                .sorted(SORT_BY_MOST_RECENT)
+                .forEach(t -> System.out.println("> " + t));
     }
 
     public void reportYearToDate() {
-        System.out.println("TEST: reportYearToDate() entered");
+        //System.out.println("TEST: reportYearToDate() entered");
+        System.out.println("\n•··· Year To Date Report ···•");
+
+        LocalDate first_day_of_curr_year = LocalDate.of(LocalDate.now().getYear(), 1, 1);
+
+        transactions.stream()
+                .filter(t -> !t.getDate().isBefore(first_day_of_curr_year))
+                .sorted(SORT_BY_MOST_RECENT)
+                .forEach(t -> System.out.println("> " + t));
     }
 
     public void reportPreviousYear() {
-        System.out.println("TEST: reportPreviousYear() entered");
+        // System.out.println("TEST: reportPreviousYear() entered");
+        System.out.println("\n•··· Previous Year Report ···•");
+
+        LocalDate first_day_of_prev_year = LocalDate.of(LocalDate.now().getYear() - 1, 1, 1);
+        LocalDate last_day_of_prev_year = LocalDate.of(LocalDate.now().getYear() - 1, 1, 31);
+
+        transactions.stream()
+                .filter(t -> !t.getDate().isAfter(last_day_of_prev_year)
+                        && !t.getDate().isBefore(first_day_of_prev_year))
+                .sorted(SORT_BY_MOST_RECENT)
+                .forEach(t -> System.out.println("> " + t));
     }
 
     public void searchByVendor() {
