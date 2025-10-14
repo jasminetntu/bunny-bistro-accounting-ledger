@@ -10,15 +10,19 @@ import java.util.stream.Stream;
 public class TransactionList {
     private final List<Transaction> transactions = new ArrayList<>();
 
-    private static final Comparator<Transaction> SORT_BY_MOST_RECENT = new Comparator<Transaction>() {
-        @Override
-        public int compare(Transaction t1, Transaction t2) {
-            return -1 * t1.getDateAndTime().compareTo(t2.getDateAndTime());
-        }
-    };
+    /**
+     * Comparator that sorts by most recent, used in all display & report methods.
+     */
+    private static final Comparator<Transaction> SORT_BY_MOST_RECENT = (t1, t2) -> -1 * t1.getDateAndTime().compareTo(t2.getDateAndTime());
 
     // *** GENERAL METHODS ***
 
+    /**
+     * Add a transaction to arraylist of all transactions.
+     * @param description String
+     * @param vendor String
+     * @param amount double
+     */
     public void addTransaction(String description, String vendor, double amount) {
         Transaction t = new Transaction(LocalDateTime.now(), description, vendor, amount);
         transactions.add(t);
@@ -27,12 +31,17 @@ public class TransactionList {
 
     // *** FILE I/O METHODS ***
 
+    /**
+     * Loads transactions from CSV file to arraylist of transactions
+     * @param filePath path to CSV file
+     */
     public void loadFromCsv(String filePath) {
         transactions.clear(); //reset to load new
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String currLine;
             String[] tranDetails;
+            br.readLine(); //clear header line
 
             while ((currLine = br.readLine()) != null) {
                 tranDetails = currLine.split("\\|", 5);
@@ -46,11 +55,18 @@ public class TransactionList {
                 }
             }
         }
-        catch (IOException ignore) {}; //occurs if file is empty -> ignore to leave transactions empty
+        catch (IOException ignore) {} //occurs if file is empty -> ignore to leave transactions empty
     }
 
+    /**
+     * Saves arraylist of transactions to CSV file in following format:
+     * date|time|description|vendor|amount
+     * @param filePath path to CSV file
+     */
     public void saveToCsv(String filePath) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            bw.write("date|time|description|vendor|amount\n");
+
             for (Transaction t : transactions) {
                 bw.write(t.toCsvString() + "\n");
             }
@@ -62,6 +78,9 @@ public class TransactionList {
 
     // *** DISPLAY METHODS ***
 
+    /**
+     * Display all transactions, sorted by most recent.
+     */
     public void displayAll() {
         System.out.println("\n•··· All Transactions ···•");
 
@@ -70,6 +89,9 @@ public class TransactionList {
                 .forEach(t -> System.out.println("> " + t));
     }
 
+    /**
+     * Display all deposits, sorted by most recent.
+     */
     public void displayAllDeposits() {
         System.out.println("\n•··· All Deposits ···•");
 
@@ -79,6 +101,9 @@ public class TransactionList {
                 .forEach(t -> System.out.println("> " + t));
     }
 
+    /**
+     * Display all payments, sorted by most recent.
+     */
     public void displayAllPayments() {
         System.out.println("\n•··· All Payments ···•");
 
@@ -90,6 +115,9 @@ public class TransactionList {
 
     // *** REPORT METHODS ***
 
+    /**
+     * Displays a report of all transactions in the current month.
+     */
     public void reportMonthToDate() {
         // System.out.println("TEST: reportMonthToDate() entered");
         System.out.println("\n•··· Month To Date Report ···•");
@@ -102,6 +130,9 @@ public class TransactionList {
                 .forEach(t -> System.out.println("> " + t));
     }
 
+    /**
+     * Displays a report of all transactions in the previous month.
+     */
     public void reportPreviousMonth() {
         //System.out.println("TEST: reportPreviousMonth() entered");
         System.out.println("\n•··· Previous Month Report ···•");
@@ -117,6 +148,9 @@ public class TransactionList {
                 .forEach(t -> System.out.println("> " + t));
     }
 
+    /**
+     * Displays a report of all transactions in the current year.
+     */
     public void reportYearToDate() {
         //System.out.println("TEST: reportYearToDate() entered");
         System.out.println("\n•··· Year To Date Report ···•");
@@ -130,6 +164,9 @@ public class TransactionList {
                 .forEach(t -> System.out.println("> " + t));
     }
 
+    /**
+     * Displays a report of all transactions in the previous year.
+     */
     public void reportPreviousYear() {
         // System.out.println("TEST: reportPreviousYear() entered");
         System.out.println("\n•··· Previous Year Report ···•");
@@ -145,6 +182,9 @@ public class TransactionList {
                 .forEach(t -> System.out.println("> " + t));
     }
 
+    /**
+     * Displays a report of all transactions with a specified vendor.
+     */
     public void searchByVendor(String vendorToSearch) {
         System.out.println("*** Searching by Vendor ***");
 
@@ -155,6 +195,11 @@ public class TransactionList {
                 .forEach(t -> System.out.println("> " + t));
     }
 
+    /**
+     * Displays a report of all transactions with specified details, including:
+     * Start date, end date, description, vendor, minimum amount, and maximum amount.
+     * May skip some details depending on if user left option blank.
+     */
     public void customSearch(LocalDate startDate, LocalDate endDate, String description,
                              String vendor, double minAmount, double maxAmount) {
         System.out.println("\n*** Performing Custom Search ***");

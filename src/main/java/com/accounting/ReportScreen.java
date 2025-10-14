@@ -5,6 +5,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ReportScreen {
+
+    /**
+     * Entry point of Report Screen.
+     * Lists options & calls functions to perform desired option.
+     */
     public static void showReport(Scanner scnr, TransactionList transactionList) {
         final String BOLD_START = "\u001B[1m";
         final String BOLD_END = "\u001B[0m";
@@ -38,8 +43,13 @@ public class ReportScreen {
                     case PREVIOUS_MONTH -> transactionList.reportPreviousMonth();
                     case YEAR_TO_DATE -> transactionList.reportYearToDate();
                     case PREVIOUS_YEAR -> transactionList.reportPreviousYear();
-                    case SEARCH_BY_VENDOR -> searchByVendor(scnr, transactionList);
-                    case CUSTOM_SEARCH -> customSearch(scnr, transactionList);
+                    case SEARCH_BY_VENDOR -> {
+                        System.out.print("\nEnter vendor name: ");
+                        String vendorName = scnr.nextLine();
+
+                        transactionList.searchByVendor(vendorName);
+                    }
+                    case CUSTOM_SEARCH -> getCustomSearchInputs(scnr, transactionList);
                     case BACK_LEDGER -> {
                         System.out.println("\n•··· Returning to ledger... ···•");
                         isRunning = false;
@@ -52,14 +62,13 @@ public class ReportScreen {
         } //end while
     }
 
-    private static void searchByVendor(Scanner scnr, TransactionList transactionList) {
-        System.out.print("\nEnter vendor name: ");
-        String vendorName = scnr.nextLine();
-
-        transactionList.searchByVendor(vendorName);
-    }
-
-    private static void customSearch(Scanner scnr, TransactionList transactionList) {
+    /**
+     * Obtains custom search inputs (start date, end date, description, vendor, min/max amount).
+     * Passes inputs to getCustomSearchInputs method to filter and print desired transactions.
+     * @param scnr Scanner object
+     * @param transactionList TransactionList object containing arraylist of transactions
+     */
+    private static void getCustomSearchInputs(Scanner scnr, TransactionList transactionList) {
         System.out.println("\n> For the following, please type your desired value OR enter to leave blank.");
 
         String input;
@@ -159,25 +168,4 @@ public class ReportScreen {
 
         transactionList.customSearch(startDate, endDate, description, vendor, minAmount, maxAmount);
     }
-
-    // *** TEST METHODS ***
-
-//    private static void reportMonthToDate() {
-//        System.out.println("TEST: reportMonthToDate() entered");
-//    }
-//
-//    private static void reportPreviousMonth() {
-//        System.out.println("TEST: reportPreviousMonth() entered");
-//    }
-//
-//    private static void reportYearToDate() {
-//        System.out.println("TEST: reportYearToDate() entered");
-//    }
-//
-//    private static void reportPreviousYear() {
-//        System.out.println("TEST: reportPreviousYear() entered");
-//    }
-//
-
-
 }

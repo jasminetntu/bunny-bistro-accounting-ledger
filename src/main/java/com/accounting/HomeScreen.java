@@ -9,6 +9,12 @@ package com.accounting;
 import java.util.Scanner;
 
 public class HomeScreen {
+
+    /**
+     * Entry point of Home Screen.
+     * Lists options & calls functions to perform desired option.
+     * Loads a CSV file of transactions when entered and loads new transactions when exited.
+     */
     public static void showHome() {
         final String FILE_PATH = "src/main/resources/transactions.csv";
         final String BOLD_START = "\u001B[1m";
@@ -58,6 +64,11 @@ public class HomeScreen {
 
     }
 
+    /**
+     * Asks user for deposit details and adds to an arraylist of all transactions.
+     * @param scnr Scanner object
+     * @param transactionList TransactionList object containing arraylist of transactions
+     */
     private static void addDeposit(Scanner scnr, TransactionList transactionList) {
         //System.out.println("TEST: addDeposit() entered");
         System.out.print("Enter deposit description: ");
@@ -81,6 +92,11 @@ public class HomeScreen {
         transactionList.addTransaction(description, vendor, amount);
     }
 
+    /**
+     * Asks user for payment details and adds to an arraylist of all transactions.
+     * @param scnr Scanner object
+     * @param transactionList TransactionList object containing arraylist of transactions
+     */
     private static void makePayment(Scanner scnr, TransactionList transactionList) {
         //System.out.println("TEST: makePayment() entered");
 

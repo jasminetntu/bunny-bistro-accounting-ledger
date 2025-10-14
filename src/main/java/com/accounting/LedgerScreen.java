@@ -3,6 +3,11 @@ package com.accounting;
 import java.util.Scanner;
 
 public class LedgerScreen {
+
+    /**
+     * Entry point of Ledger Screen.
+     * Lists options & calls functions to perform desired option.
+     */
     public static void showLedger(Scanner scnr, TransactionList transactionList) {
         final String BOLD_START = "\u001B[1m";
         final String BOLD_END = "\u001B[0m";
@@ -46,19 +51,4 @@ public class LedgerScreen {
         } //end while
 
     }
-
-    // *** TEST METHODS ***
-
-//    private static void displayAll(TransactionList transactionList) {
-//        System.out.println("TEST: displayAll() entered");
-//    }
-//
-//    private static void displayDeposits() {
-//        System.out.println("TEST: displayDeposits() entered");
-//    }
-//
-//    private static void displayPayments() {
-//        System.out.println("TEST: displayPayments() entered");
-//    }
-
 }
