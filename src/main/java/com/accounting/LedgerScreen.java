@@ -8,7 +8,7 @@ public class LedgerScreen {
         final String BOLD_END = "\u001B[0m";
 
         boolean isRunning = true;
-        LedgerOption ledgerChoice = null;
+        LedgerOption ledgerChoice;
 
         while (isRunning) {
             System.out.printf("""

@@ -10,7 +10,7 @@ public class ReportScreen {
         final String BOLD_END = "\u001B[0m";
 
         boolean isRunning = true;
-        ReportOption reportChoice = null;
+        ReportOption reportChoice;
 
         while (isRunning) {
             System.out.printf("""
@@ -65,8 +65,8 @@ public class ReportScreen {
         String input;
         LocalDate startDate = null;
         LocalDate endDate = null;
-        String description = "";
-        String vendor = "";
+        String description;
+        String vendor;
         double minAmount = 0;
         double maxAmount = 0;
 

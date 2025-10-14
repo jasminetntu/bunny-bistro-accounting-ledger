@@ -19,7 +19,7 @@ public class HomeScreen {
         transactionList.loadFromCsv(FILE_PATH);
 
         boolean isRunning = true;
-        HomeOption homeChoice = null;
+        HomeOption homeChoice;
 
         while (isRunning) {
             System.out.printf("""
