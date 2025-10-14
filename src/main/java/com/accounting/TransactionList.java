@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TransactionList {
@@ -14,7 +13,7 @@ public class TransactionList {
     /**
      * Comparator that sorts by most recent, used in all display & report methods.
      */
-    private static final Comparator<Transaction> SORT_BY_MOST_RECENT =
+    private final Comparator<Transaction> SORT_BY_MOST_RECENT =
             (t1, t2) -> -1 * t1.getDateAndTime().compareTo(t2.getDateAndTime());
 
     // *** GENERAL METHODS ***
@@ -28,7 +27,7 @@ public class TransactionList {
     public void addTransaction(String description, String vendor, double amount) {
         Transaction t = new Transaction(LocalDateTime.now(), description, vendor, amount);
         transactions.add(t);
-        System.out.println("The following transaction has been added:\n" + t);
+        System.out.println("\nThe following transaction has been added:\n" + t);
     }
 
     // *** FILE I/O METHODS ***

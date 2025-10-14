@@ -21,11 +21,15 @@ public class HomeScreen {
         HomeOption homeChoice;
 
         while (isRunning) {
-            System.out.print("\n•·················•·················•" +
+            System.out.print("""
+                    
+                       ∩_∩
+                     („• •„)
+                    •··U U·············•··················•""" +
                     Utility.boldString("\n\t\t\t\tHome") +
                     """
                     
-                    •·················•·················•
+                    •··················•··················•
                     What would you like to do?
                         (D) Add Deposit
                         (P) Make Payment (Debit)
@@ -41,9 +45,20 @@ public class HomeScreen {
                 switch (homeChoice) {
                     case ADD_DEPOSIT -> addDeposit(scnr, transactionList);
                     case MAKE_PAYMENT -> makePayment(scnr, transactionList);
-                    case LEDGER -> LedgerScreen.showLedger(scnr, transactionList);
+                    case LEDGER -> {
+                        System.out.println("\n⊹ ࣪ ˖ Accessing ledger...");
+                        Utility.loadingBar();
+                        LedgerScreen.showLedger(scnr, transactionList);
+                    }
                     case EXIT -> {
-                        System.out.println("\n•··· Goodbye! ···•");
+                        System.out.println("""
+                                      
+                                       ⊹ ࣪ ˖ Goodbye! ˖ ࣪ ⊹
+
+                                        (\\_(\\     /)_/)
+                                        (    )   (    )
+                                       /    |     |    \\
+                                      ( O    )   (    O )""");
                         isRunning = false;
                     }
                 }
@@ -54,6 +69,9 @@ public class HomeScreen {
             }
             catch (IllegalArgumentException e) {
                 System.out.println("Invalid menu choice. Please enter D, P, L, or X.");
+            }
+            catch (InterruptedException e) {
+                System.out.println("Error encountered: Interrupted exception.");
             }
         } //end while
 
@@ -66,13 +84,37 @@ public class HomeScreen {
      */
     private static void addDeposit(Scanner scnr, TransactionList transactionList) {
         //System.out.println("TEST: addDeposit() entered");
-        System.out.print("Enter deposit description: ");
-        String description = scnr.nextLine().trim();
-        System.out.print("Enter deposit vendor: ");
-        String vendor = scnr.nextLine().trim();
+        String description = "";
+        String vendor = "";
+        double amount = 0;
 
         boolean isValid = false;
-        double amount = 0;
+        while (!isValid) {
+            System.out.print("Enter deposit description: ");
+            description = scnr.nextLine().trim();
+
+            if (description.isEmpty()) {
+                System.out.println("Description cannot be empty. Try again.");
+            }
+            else {
+                isValid = true;
+            }
+        }
+
+        isValid = false;
+        while (!isValid) {
+            System.out.print("Enter deposit vendor: ");
+            vendor = scnr.nextLine().trim();
+
+            if (vendor.isEmpty()) {
+                System.out.println("Vendor cannot be empty. Try again.");
+            }
+            else {
+                isValid = true;
+            }
+        }
+
+        isValid = false;
         while (!isValid) {
             System.out.print("Enter deposit $ amount: ");
 

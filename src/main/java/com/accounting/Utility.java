@@ -1,6 +1,7 @@
 package com.accounting;
 
 import java.util.Scanner;
+import java.time.*;
 
 public class Utility {
     public static String boldString(String stringToBold) {
@@ -10,5 +11,15 @@ public class Utility {
     public static void waitForKey(Scanner scnr) {
         System.out.print("\n> Press enter to continue.");
         scnr.nextLine();
+    }
+
+    public static void loadingBar() throws InterruptedException {
+        for (int i = 0; i < 10; ++i) {
+            Thread.sleep(150);
+            //System.out.print("𐙚 ₍ᐢ..ᐢ₎ ");
+            System.out.print("▒▒▒");
+        }
+        System.out.println();
+        Thread.sleep(200);
     }
 }

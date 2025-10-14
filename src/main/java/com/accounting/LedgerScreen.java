@@ -1,3 +1,9 @@
+/**
+ * @author Jasmine Tu
+ * Capstone 1 - Accounting Ledger App
+ *
+ * Handles Ledger Screen operations (display all transactions/deposits/payments, view reports).
+ */
 package com.accounting;
 
 import java.util.Scanner;
@@ -15,11 +21,15 @@ public class LedgerScreen {
         LedgerOption ledgerChoice;
 
         while (isRunning) {
-            System.out.printf("\n•·················•·················•" +
+            System.out.printf("""
+                    
+                       ∩_∩
+                     („• •„)
+                    •··U U·············•··················•""" +
                     Utility.boldString("\n\t\t\t\tLedger") +
                     """
                     
-                    •·················•·················•
+                    •··················•··················•
                     Display...
                         (A) All Transactions
                         (D) Deposits
@@ -37,9 +47,14 @@ public class LedgerScreen {
                     case DISPLAY_ALL -> transactionList.displayAll();
                     case DISPLAY_DEPOSITS -> transactionList.displayAllDeposits();
                     case DISPLAY_PAYMENTS -> transactionList.displayAllPayments();
-                    case REPORT -> ReportScreen.showReport(scnr, transactionList);
+                    case REPORT -> {
+                        System.out.println("\n⊹ ࣪ ˖ Accessing reports...");
+                        Utility.loadingBar();
+                        ReportScreen.showReport(scnr, transactionList);
+                    }
                     case BACK_HOME -> {
-                        System.out.println("\n•··· Returning to home... ···•");
+                        System.out.println("\n⊹ ࣪ ˖ Returning to home...");
+                        Utility.loadingBar();
                         isRunning = false;
                     }
                 }
@@ -50,6 +65,9 @@ public class LedgerScreen {
             }
             catch (IllegalArgumentException e) {
                 System.out.println("Invalid menu choice. Please enter A, D, P, R, or H.");
+            }
+            catch (InterruptedException e) {
+                System.out.println("Error encountered: Interrupted exception.");
             }
         } //end while
 

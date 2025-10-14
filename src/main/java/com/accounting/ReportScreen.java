@@ -1,3 +1,9 @@
+/**
+ * @author Jasmine Tu
+ * Capstone 1 - Accounting Ledger App
+ *
+ * Handles Report Screen operations (display reports on MTD/prev month/YTD/prev year, allows vendor & custom search).
+ */
 package com.accounting;
 
 import java.time.LocalDate;
@@ -17,11 +23,15 @@ public class ReportScreen {
         ReportOption reportChoice;
 
         while (isRunning) {
-            System.out.printf("\n•·················•·················•" +
+            System.out.printf("""
+                    
+                       ∩_∩
+                     („• •„)
+                    •··U U·············•··················•""" +
                     Utility.boldString("\n\t\t\t\tReports") +
                     """
                     
-                    •·················•·················•
+                    •··················•··················•
                     Run report from...
                         (1) Month To Date
                         (2) Previous Month
@@ -50,7 +60,8 @@ public class ReportScreen {
                     }
                     case CUSTOM_SEARCH -> getCustomSearchInputs(scnr, transactionList);
                     case BACK_LEDGER -> {
-                        System.out.println("\n•··· Returning to ledger... ···•");
+                        System.out.println("\n⊹ ࣪ ˖ Returning to ledger...");
+                        Utility.loadingBar();
                         isRunning = false;
                     }
                 }
@@ -61,6 +72,9 @@ public class ReportScreen {
             }
             catch (IllegalArgumentException e) {
                 System.out.println("Invalid menu choice. Please enter a number between 0-6.");
+            }
+            catch (InterruptedException e) {
+                System.out.println("Error encountered: Interrupted exception.");
             }
         } //end while
     }
