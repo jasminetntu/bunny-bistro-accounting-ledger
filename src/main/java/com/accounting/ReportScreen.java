@@ -9,19 +9,18 @@ public class ReportScreen {
     /**
      * Entry point of Report Screen.
      * Lists options & calls functions to perform desired option.
+     * @param scnr Scanner objects
+     * @param transactionList TransactionList object containing arraylist of transactions
      */
     public static void showReport(Scanner scnr, TransactionList transactionList) {
-        final String BOLD_START = "\u001B[1m";
-        final String BOLD_END = "\u001B[0m";
-
         boolean isRunning = true;
         ReportOption reportChoice;
 
         while (isRunning) {
-            System.out.printf("""
+            System.out.printf("\n•·················•·················•" +
+                    Utility.boldString("\n\t\t\t\tReports") +
+                    """
                     
-                    •·················•·················•
-                                   %sReports%s
                     •·················•·················•
                     Run report from...
                         (1) Month To Date
@@ -32,7 +31,7 @@ public class ReportScreen {
                         (6) Custom Search
                     
                         (0) Back to Ledger
-                    > Enter choice (0-6):\s""", BOLD_START, BOLD_END);
+                    > Enter choice (0-6):\s""");
 
             try {
                 reportChoice = ReportOption.fromInputNum(Integer.parseInt(scnr.nextLine()));
@@ -71,11 +70,10 @@ public class ReportScreen {
     private static void getCustomSearchInputs(Scanner scnr, TransactionList transactionList) {
         System.out.println("\n> For the following, please type your desired value OR enter to leave blank.");
 
+        // initialize necessary values
         String input;
         LocalDate startDate = null;
         LocalDate endDate = null;
-        String description;
-        String vendor;
         double minAmount = 0;
         double maxAmount = 0;
 
@@ -117,11 +115,11 @@ public class ReportScreen {
 
         //get description
         System.out.print("Description: ");
-        description = scnr.nextLine().trim();
+        String description = scnr.nextLine().trim();
 
         //get vendor
         System.out.print("Vendor: ");
-        vendor = scnr.nextLine().trim();
+        String vendor = scnr.nextLine().trim();
 
         //get min amount
         isValid = false;
@@ -167,5 +165,8 @@ public class ReportScreen {
         }
 
         transactionList.customSearch(startDate, endDate, description, vendor, minAmount, maxAmount);
+
+        System.out.print("\nPress enter when you're ready to continue.");
+        scnr.nextLine();
     }
 }

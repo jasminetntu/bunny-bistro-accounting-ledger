@@ -1,5 +1,7 @@
 package com.accounting;
 
+import jdk.jshell.execution.Util;
+
 import java.util.Scanner;
 
 public class LedgerScreen {
@@ -7,19 +9,18 @@ public class LedgerScreen {
     /**
      * Entry point of Ledger Screen.
      * Lists options & calls functions to perform desired option.
+     * @param scnr Scanner objects
+     * @param transactionList TransactionList object containing arraylist of transactions
      */
     public static void showLedger(Scanner scnr, TransactionList transactionList) {
-        final String BOLD_START = "\u001B[1m";
-        final String BOLD_END = "\u001B[0m";
-
         boolean isRunning = true;
         LedgerOption ledgerChoice;
 
         while (isRunning) {
-            System.out.printf("""
+            System.out.printf("\n•·················•·················•" +
+                    Utility.boldString("\n\t\t\t\tLedger") +
+                    """
                     
-                    •·················•·················•
-                                    %sLedger%s
                     •·················•·················•
                     Display...
                         (A) All Transactions
@@ -28,7 +29,7 @@ public class LedgerScreen {
                         (R) Reports
                     
                         (H) Back to Home
-                    > Enter choice (A, D, P, R, H):\s""", BOLD_START, BOLD_END);
+                    > Enter choice (A, D, P, R, H):\s""");
 
             try {
                 ledgerChoice = LedgerOption.fromInputLetter(scnr.nextLine());

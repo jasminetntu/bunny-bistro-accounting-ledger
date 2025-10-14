@@ -13,7 +13,8 @@ public class TransactionList {
     /**
      * Comparator that sorts by most recent, used in all display & report methods.
      */
-    private static final Comparator<Transaction> SORT_BY_MOST_RECENT = (t1, t2) -> -1 * t1.getDateAndTime().compareTo(t2.getDateAndTime());
+    private static final Comparator<Transaction> SORT_BY_MOST_RECENT =
+            (t1, t2) -> -1 * t1.getDateAndTime().compareTo(t2.getDateAndTime());
 
     // *** GENERAL METHODS ***
 

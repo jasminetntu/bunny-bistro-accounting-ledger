@@ -7,19 +7,29 @@
 
 package com.accounting;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // bold beginning & end
-        String BOLD_START = "\u001B[1m";
-        String BOLD_END = "\u001B[0m";
+        // variables & constants
+        final String FILE_PATH = "src/main/resources/transactions.csv";
+
+        Scanner scnr = new Scanner(System.in);
+        TransactionList transactionList = new TransactionList();
+
+        // load a CSV file of transactions
+        transactionList.loadFromCsv(FILE_PATH);
 
         //title
-        System.out.printf("""
-                •·················•·················•
-                      %sBunny Bistro%s 🍵ིྀ༘₍ᐢ. .ᐢ₎₊˚⊹
-                        > Sales & Purchases <""", BOLD_START, BOLD_END);
+        System.out.print("•·················•·················•" +
+                Utility.boldString("\n\t\tBunny Bistro") + "🍵ིྀ༘₍ᐢ. .ᐢ₎₊˚⊹" +
+                "\n\t\t> Sales & Purchases <");
 
         //enter home screen
-        HomeScreen.showHome();
+        HomeScreen.showHome(scnr, transactionList);
+
+        //save new transactions when exited
+        transactionList.saveToCsv(FILE_PATH);
+        scnr.close();
     }
 }

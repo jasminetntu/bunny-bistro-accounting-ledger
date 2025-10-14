@@ -13,25 +13,18 @@ public class HomeScreen {
     /**
      * Entry point of Home Screen.
      * Lists options & calls functions to perform desired option.
-     * Loads a CSV file of transactions when entered and loads new transactions when exited.
+     * @param scnr Scanner objects
+     * @param transactionList TransactionList object containing arraylist of transactions
      */
-    public static void showHome() {
-        final String FILE_PATH = "src/main/resources/transactions.csv";
-        final String BOLD_START = "\u001B[1m";
-        final String BOLD_END = "\u001B[0m";
-
-        Scanner scnr = new Scanner(System.in);
-        TransactionList transactionList = new TransactionList();
-        transactionList.loadFromCsv(FILE_PATH);
-
+    public static void showHome(Scanner scnr, TransactionList transactionList) {
         boolean isRunning = true;
         HomeOption homeChoice;
 
         while (isRunning) {
-            System.out.printf("""
+            System.out.print("\n•·················•·················•" +
+                    Utility.boldString("\n\t\t\t\tHome") +
+                    """
                     
-                    •·················•·················•
-                                    %sHome%s
                     •·················•·················•
                     What would you like to do?
                         (D) Add Deposit
@@ -39,7 +32,7 @@ public class HomeScreen {
                         (L) View Ledger
                     
                         (X) Exit
-                    > Enter choice (D, P, L, X):\s""", BOLD_START, BOLD_END);
+                    > Enter choice (D, P, L, X):\s""");
 
             try {
                 homeChoice = HomeOption.fromInputLetter(scnr.nextLine());
@@ -51,9 +44,7 @@ public class HomeScreen {
                     case LEDGER -> LedgerScreen.showLedger(scnr, transactionList);
                     case EXIT -> {
                         System.out.println("\n•··· Goodbye! ···•");
-                        transactionList.saveToCsv(FILE_PATH);
                         isRunning = false;
-                        scnr.close();
                     }
                 }
             }
