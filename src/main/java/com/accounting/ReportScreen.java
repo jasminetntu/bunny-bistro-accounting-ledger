@@ -54,6 +54,10 @@ public class ReportScreen {
                         isRunning = false;
                     }
                 }
+
+                if (!reportChoice.equals(ReportOption.BACK_LEDGER)) {
+                    Utility.waitForKey(scnr);
+                }
             }
             catch (IllegalArgumentException e) {
                 System.out.println("Invalid menu choice. Please enter a number between 0-6.");
@@ -165,8 +169,5 @@ public class ReportScreen {
         }
 
         transactionList.customSearch(startDate, endDate, description, vendor, minAmount, maxAmount);
-
-        System.out.print("\nPress enter when you're ready to continue.");
-        scnr.nextLine();
     }
 }

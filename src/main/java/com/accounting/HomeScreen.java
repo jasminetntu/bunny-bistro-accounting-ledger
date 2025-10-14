@@ -47,6 +47,10 @@ public class HomeScreen {
                         isRunning = false;
                     }
                 }
+
+                if (!homeChoice.equals(HomeOption.EXIT) && !homeChoice.equals(HomeOption.LEDGER)) {
+                    Utility.waitForKey(scnr);
+                }
             }
             catch (IllegalArgumentException e) {
                 System.out.println("Invalid menu choice. Please enter D, P, L, or X.");

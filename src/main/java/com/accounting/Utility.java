@@ -8,7 +8,7 @@ public class Utility {
     }
 
     public static void waitForKey(Scanner scnr) {
-        System.out.print("\nPress enter when you're ready to continue.");
+        System.out.print("\n> Press enter to continue.");
         scnr.nextLine();
     }
 }

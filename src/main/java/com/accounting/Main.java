@@ -17,7 +17,7 @@ public class Main {
         Scanner scnr = new Scanner(System.in);
         TransactionList transactionList = new TransactionList();
 
-        // load a CSV file of transactions
+        //load CSV file of transactions
         transactionList.loadFromCsv(FILE_PATH);
 
         //title

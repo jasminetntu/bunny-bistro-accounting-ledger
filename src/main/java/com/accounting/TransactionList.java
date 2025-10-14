@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TransactionList {
@@ -27,7 +28,7 @@ public class TransactionList {
     public void addTransaction(String description, String vendor, double amount) {
         Transaction t = new Transaction(LocalDateTime.now(), description, vendor, amount);
         transactions.add(t);
-        System.out.println("The following transaction has been added: " + t);
+        System.out.println("The following transaction has been added:\n" + t);
     }
 
     // *** FILE I/O METHODS ***
@@ -85,9 +86,14 @@ public class TransactionList {
     public void displayAll() {
         System.out.println("\n•··· All Transactions ···•");
 
-        transactions.stream()
-                .sorted(SORT_BY_MOST_RECENT)
-                .forEach(t -> System.out.println("> " + t));
+        if (transactions.isEmpty()) {
+            System.out.println("No transactions found.");
+        }
+        else {
+            transactions.stream()
+                    .sorted(SORT_BY_MOST_RECENT)
+                    .forEach(t -> System.out.println("> " + t));
+        }
     }
 
     /**
@@ -96,10 +102,20 @@ public class TransactionList {
     public void displayAllDeposits() {
         System.out.println("\n•··· All Deposits ···•");
 
-        transactions.stream()
-                .filter(t -> t.getAmount() > 0) //ensures only positive amounts
-                .sorted(SORT_BY_MOST_RECENT)
-                .forEach(t -> System.out.println("> " + t));
+        //collect matching results into list to check if empty
+        List<Transaction> matchingTransactions = transactions.stream()
+                //filters based on: positive amounts
+                .filter(t -> t.getAmount() > 0)
+                .toList();
+
+        if (matchingTransactions.isEmpty()) {
+            System.out.println("No deposits found.");
+        }
+        else { //print results only if there are matching transactions
+            matchingTransactions.stream()
+                    .sorted(SORT_BY_MOST_RECENT)
+                    .forEach(t -> System.out.println("> " + t));
+        }
     }
 
     /**
@@ -108,10 +124,20 @@ public class TransactionList {
     public void displayAllPayments() {
         System.out.println("\n•··· All Payments ···•");
 
-        transactions.stream()
-                .filter(t -> t.getAmount() < 0) //ensures only negative amounts
-                .sorted(SORT_BY_MOST_RECENT)
-                .forEach(t -> System.out.println("> " + t));
+        //collect matching results into list to check if empty
+        List<Transaction> matchingTransactions = transactions.stream()
+                //filters based on: negative amounts
+                .filter(t -> t.getAmount() < 0)
+                .toList();
+
+        if (matchingTransactions.isEmpty()) {
+            System.out.println("No payments found.");
+        }
+        else { //print results only if there are matching transactions
+            matchingTransactions.stream()
+                    .sorted(SORT_BY_MOST_RECENT)
+                    .forEach(t -> System.out.println("> " + t));
+        }
     }
 
     // *** REPORT METHODS ***
@@ -124,11 +150,21 @@ public class TransactionList {
         System.out.println("\n•··· Month To Date Report ···•");
 
         LocalDate first_day_of_month = LocalDate.now().withDayOfMonth(1);
-        transactions.stream()
+
+        //collect matching results into list to check if empty
+        List<Transaction> matchingTransactions = transactions.stream()
                 //filters based on: curr month/01/curr year <= date
                 .filter(t -> !t.getDate().isBefore(first_day_of_month))
-                .sorted(SORT_BY_MOST_RECENT)
-                .forEach(t -> System.out.println("> " + t));
+                .toList();
+
+        if (matchingTransactions.isEmpty()) {
+            System.out.println("No transactions during current month found.");
+        }
+        else { //print results only if there are matching transactions
+            matchingTransactions.stream()
+                    .sorted(SORT_BY_MOST_RECENT)
+                    .forEach(t -> System.out.println("> " + t));
+        }
     }
 
     /**
@@ -141,12 +177,21 @@ public class TransactionList {
         LocalDate first_day_of_curr_month = LocalDate.now().withDayOfMonth(1);
         LocalDate first_day_of_prev_month = LocalDate.now().withDayOfMonth(1).minusMonths(1);
 
-        transactions.stream()
+        //collect matching results into list to check if empty
+        List<Transaction> matchingTransactions = transactions.stream()
                 //filters based on: prev month/01 <= date < curr month/01 (curr year)
                 .filter(t -> t.getDate().isBefore(first_day_of_curr_month)
                         && !t.getDate().isBefore(first_day_of_prev_month))
-                .sorted(SORT_BY_MOST_RECENT)
-                .forEach(t -> System.out.println("> " + t));
+                .toList();
+
+        if (matchingTransactions.isEmpty()) {
+            System.out.println("No transactions from last month found.");
+        }
+        else { //print results only if there are matching transactions
+            matchingTransactions.stream()
+                    .sorted(SORT_BY_MOST_RECENT)
+                    .forEach(t -> System.out.println("> " + t));
+        }
     }
 
     /**
@@ -158,11 +203,20 @@ public class TransactionList {
 
         LocalDate first_day_of_curr_year = LocalDate.of(LocalDate.now().getYear(), 1, 1);
 
-        transactions.stream()
+        //collect matching results into list to check if empty
+        List<Transaction> matchingTransactions = transactions.stream()
                 //filters based on: 01/01/curr year <= date
                 .filter(t -> !t.getDate().isBefore(first_day_of_curr_year))
-                .sorted(SORT_BY_MOST_RECENT)
-                .forEach(t -> System.out.println("> " + t));
+                .toList();
+
+        if (matchingTransactions.isEmpty()) {
+            System.out.println("No transactions from this year found.");
+        }
+        else { //print results only if there are matching transactions
+            matchingTransactions.stream()
+                    .sorted(SORT_BY_MOST_RECENT)
+                    .forEach(t -> System.out.println("> " + t));
+        }
     }
 
     /**
@@ -175,25 +229,43 @@ public class TransactionList {
         LocalDate first_day_of_prev_year = LocalDate.of(LocalDate.now().getYear() - 1, 1, 1);
         LocalDate last_day_of_prev_year = LocalDate.of(LocalDate.now().getYear() - 1, 1, 31);
 
-        transactions.stream()
+        //collect matching results into list to check if empty
+        List<Transaction> matchingTransactions = transactions.stream()
                 //filters based on: 01/01/prev year <= date <= 12/31/prev year
                 .filter(t -> !t.getDate().isAfter(last_day_of_prev_year)
                         && !t.getDate().isBefore(first_day_of_prev_year))
-                .sorted(SORT_BY_MOST_RECENT)
-                .forEach(t -> System.out.println("> " + t));
+                .toList();
+
+        if (matchingTransactions.isEmpty()) {
+            System.out.println("No transactions from last year found.");
+        }
+        else { //print results only if there are matching transactions
+            matchingTransactions.stream()
+                    .sorted(SORT_BY_MOST_RECENT)
+                    .forEach(t -> System.out.println("> " + t));
+        }
     }
 
     /**
      * Displays a report of all transactions with a specified vendor.
      */
     public void searchByVendor(String vendorToSearch) {
-        System.out.println("*** Searching by Vendor ***");
+        System.out.println("\n•··· Searching by Vendor ···•");
 
-        transactions.stream()
-                //filters based on matching vendor name
+        //collect matching results into list to check if empty
+        List<Transaction> matchingTransactions = transactions.stream()
+                //filters based on: matching vendor
                 .filter(t -> t.getVendor().equalsIgnoreCase(vendorToSearch))
-                .sorted(SORT_BY_MOST_RECENT)
-                .forEach(t -> System.out.println("> " + t));
+                .toList();
+
+        if (matchingTransactions.isEmpty()) {
+            System.out.println("No transactions from \"" + vendorToSearch + "\" found.");
+        }
+        else { //print results only if there are matching transactions
+            matchingTransactions.stream()
+                    .sorted(SORT_BY_MOST_RECENT)
+                    .forEach(t -> System.out.println("> " + t));
+        }
     }
 
     /**
@@ -203,7 +275,7 @@ public class TransactionList {
      */
     public void customSearch(LocalDate startDate, LocalDate endDate, String description,
                              String vendor, double minAmount, double maxAmount) {
-        System.out.println("\n*** Performing Custom Search ***");
+        System.out.println("\n•··· Performing Custom Search ···•");
 
         Stream<Transaction> tempStream = transactions.stream();
 
@@ -241,9 +313,18 @@ public class TransactionList {
             tempStream = tempStream.filter(t -> Math.abs(t.getAmount()) <= maxAmount);
         }
 
-        //sort by most recent and print
-        tempStream.sorted(SORT_BY_MOST_RECENT)
-                .forEach(t -> System.out.println("> " + t));
+        //collect matching results into list to check if empty
+        List<Transaction> matchingTransactions = tempStream.toList();
+
+        if (matchingTransactions.isEmpty()) {
+            System.out.println("No matching transactions found.");
+        }
+        else { //print results only if there are matching transactions
+            matchingTransactions.stream()
+                    .sorted(SORT_BY_MOST_RECENT)
+                    .forEach(t -> System.out.println("> " + t));
+        }
+
     }
 
 }

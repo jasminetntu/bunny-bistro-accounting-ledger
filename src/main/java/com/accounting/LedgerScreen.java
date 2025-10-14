@@ -1,7 +1,5 @@
 package com.accounting;
 
-import jdk.jshell.execution.Util;
-
 import java.util.Scanner;
 
 public class LedgerScreen {
@@ -39,11 +37,15 @@ public class LedgerScreen {
                     case DISPLAY_ALL -> transactionList.displayAll();
                     case DISPLAY_DEPOSITS -> transactionList.displayAllDeposits();
                     case DISPLAY_PAYMENTS -> transactionList.displayAllPayments();
-                    case DISPLAY_REPORTS -> ReportScreen.showReport(scnr, transactionList);
+                    case REPORT -> ReportScreen.showReport(scnr, transactionList);
                     case BACK_HOME -> {
                         System.out.println("\n•··· Returning to home... ···•");
                         isRunning = false;
                     }
+                }
+
+                if (!ledgerChoice.equals(LedgerOption.BACK_HOME) && !ledgerChoice.equals(LedgerOption.REPORT)) {
+                    Utility.waitForKey(scnr);
                 }
             }
             catch (IllegalArgumentException e) {
