@@ -1,5 +1,7 @@
 package com.accounting;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ReportScreen {
@@ -36,8 +38,8 @@ public class ReportScreen {
                     case PREVIOUS_MONTH -> transactionList.reportPreviousMonth();
                     case YEAR_TO_DATE -> transactionList.reportYearToDate();
                     case PREVIOUS_YEAR -> transactionList.reportPreviousYear();
-                    case SEARCH_BY_VENDOR -> transactionList.searchByVendor();
-                    case CUSTOM_SEARCH -> transactionList.customSearch();
+                    case SEARCH_BY_VENDOR -> searchByVendor(scnr, transactionList);
+                    case CUSTOM_SEARCH -> customSearch(scnr, transactionList);
                     case BACK_LEDGER -> {
                         System.out.println("\n•··· Returning to ledger... ···•");
                         isRunning = false;
@@ -50,6 +52,92 @@ public class ReportScreen {
         } //end while
     }
 
+    private static void searchByVendor(Scanner scnr, TransactionList transactionList) {
+        System.out.print("\nEnter vendor name: ");
+        String vendorName = scnr.nextLine();
+
+        transactionList.searchByVendor(vendorName);
+    }
+
+    private static void customSearch(Scanner scnr, TransactionList transactionList) {
+        System.out.println("\n> For the following, please type your desired value OR enter to leave blank.");
+
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+        String description = "";
+        String vendor = "";
+        double minAmount = 0;
+        double maxAmount = 0;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+        boolean isValid = false;
+
+        while (!isValid) {
+            try {
+                System.out.print("Start date (MM/dd/yyyy): ");
+                startDate = LocalDate.parse(scnr.nextLine(), formatter);
+                isValid = true;
+            }
+            catch (Exception e) {
+                System.out.println("Not a valid date format. Please follow MM/dd/yyyy exactly.");
+            }
+        }
+
+        isValid = false;
+        while (!isValid) {
+            try {
+                System.out.print("End date (MM/dd/yyyy): ");
+                endDate = LocalDate.parse(scnr.nextLine(), formatter);
+                isValid = true;
+            }
+            catch (Exception e) {
+                System.out.println("Not a valid date format. Please follow MM/dd/yyyy exactly.");
+            }
+        }
+
+        System.out.print("Description: ");
+        description = scnr.nextLine();
+
+        System.out.print("Vendor: ");
+        vendor = scnr.nextLine();
+
+        isValid = false;
+        while (!isValid) {
+            try {
+                System.out.print("Minimum amount: ");
+                minAmount = Double.parseDouble(scnr.nextLine());
+
+                if (minAmount < 0) {
+                    System.out.println("Invalid amount. Please enter a nonnegative number.");
+                }
+
+                isValid = true;
+            }
+            catch (Exception e) {
+                System.out.println("Invalid amount. Please enter a nonnegative number.");
+            }
+        }
+
+        isValid = false;
+        while (!isValid) {
+            try {
+                System.out.print("Maximum amount: ");
+                maxAmount = Double.parseDouble(scnr.nextLine());
+
+                if (minAmount < 0) {
+                    System.out.println("Invalid amount. Please enter a nonnegative number.");
+                }
+
+                isValid = true;
+            }
+            catch (Exception e) {
+                System.out.println("Invalid amount. Please enter a nonnegative number.");
+            }
+        }
+
+        transactionList.customSearch(startDate, endDate, description, vendor, minAmount, maxAmount);
+    }
     // *** TEST METHODS ***
 
 //    private static void reportMonthToDate() {
@@ -68,12 +156,6 @@ public class ReportScreen {
 //        System.out.println("TEST: reportPreviousYear() entered");
 //    }
 //
-//    private static void searchByVendor() {
-//        System.out.println("TEST: searchByVendor() entered");
-//    }
-//
-//    private static void customSearch() {
-//        System.out.println("TEST: customSearch() entered");
-//    }
-//
+
+
 }

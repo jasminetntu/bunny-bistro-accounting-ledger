@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class TransactionList {
     private final List<Transaction> transactions = new ArrayList<>();
@@ -146,12 +147,21 @@ public class TransactionList {
                 .forEach(t -> System.out.println("> " + t));
     }
 
-    public void searchByVendor() {
-        System.out.println("TEST: searchByVendor() entered");
+    public void searchByVendor(String vendorToSearch) {
+        System.out.println("*** Searching by Vendor ***");
+
+        transactions.stream()
+                //filters based on matching vendor name
+                .filter(t -> t.getVendor().equalsIgnoreCase(vendorToSearch))
+                .sorted(SORT_BY_MOST_RECENT)
+                .forEach(t -> System.out.println("> " + t));
     }
 
-    public void customSearch() {
-        System.out.println("TEST: customSearch() entered");
+    public void customSearch(LocalDate startDate, LocalDate endDate, String description,
+                             String vendor, double minAmount, double maxAmount) {
+        System.out.println("*** Performing Custom Search ***");
+
+        Stream tempStream = transactions.stream();
     }
 
 }
