@@ -24,7 +24,7 @@ public class ReportScreen {
                         (3) Year To Date
                         (4) Previous Year
                         (5) Search by Vendor
-                        (6) Custom Search --> DO LAST (OPTIONAL)
+                        (6) Custom Search
                     
                         (0) Back to Ledger
                     > Enter choice (0-6):\s""", BOLD_START, BOLD_END);
@@ -62,6 +62,7 @@ public class ReportScreen {
     private static void customSearch(Scanner scnr, TransactionList transactionList) {
         System.out.println("\n> For the following, please type your desired value OR enter to leave blank.");
 
+        String input;
         LocalDate startDate = null;
         LocalDate endDate = null;
         String description = "";
@@ -71,12 +72,16 @@ public class ReportScreen {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
+        //get start date
         boolean isValid = false;
-
         while (!isValid) {
             try {
                 System.out.print("Start date (MM/dd/yyyy): ");
-                startDate = LocalDate.parse(scnr.nextLine(), formatter);
+                input = scnr.nextLine().trim();
+
+                if (!input.isEmpty()) {
+                    startDate = LocalDate.parse(input, formatter);
+                }
                 isValid = true;
             }
             catch (Exception e) {
@@ -84,11 +89,16 @@ public class ReportScreen {
             }
         }
 
+        //get end date
         isValid = false;
         while (!isValid) {
             try {
                 System.out.print("End date (MM/dd/yyyy): ");
-                endDate = LocalDate.parse(scnr.nextLine(), formatter);
+                input = scnr.nextLine().trim();
+
+                if (!input.isEmpty()) {
+                    endDate = LocalDate.parse(input, formatter);
+                }
                 isValid = true;
             }
             catch (Exception e) {
@@ -96,20 +106,27 @@ public class ReportScreen {
             }
         }
 
+        //get description
         System.out.print("Description: ");
-        description = scnr.nextLine();
+        description = scnr.nextLine().trim();
 
+        //get vendor
         System.out.print("Vendor: ");
-        vendor = scnr.nextLine();
+        vendor = scnr.nextLine().trim();
 
+        //get min amount
         isValid = false;
         while (!isValid) {
             try {
                 System.out.print("Minimum amount: ");
-                minAmount = Double.parseDouble(scnr.nextLine());
+                input = scnr.nextLine().trim();
 
-                if (minAmount < 0) {
-                    System.out.println("Invalid amount. Please enter a nonnegative number.");
+                if (!input.isEmpty()) {
+                    minAmount = Double.parseDouble(input);
+
+                    if (minAmount < 0) {
+                        System.out.println("Invalid amount. Please enter a nonnegative number.");
+                    }
                 }
 
                 isValid = true;
@@ -119,16 +136,20 @@ public class ReportScreen {
             }
         }
 
+        //get max amount
         isValid = false;
         while (!isValid) {
             try {
                 System.out.print("Maximum amount: ");
-                maxAmount = Double.parseDouble(scnr.nextLine());
+                input = scnr.nextLine().trim();
 
-                if (minAmount < 0) {
-                    System.out.println("Invalid amount. Please enter a nonnegative number.");
+                if (!input.isEmpty()) {
+                    maxAmount = Double.parseDouble(input);
+
+                    if (maxAmount < 0) {
+                        System.out.println("Invalid amount. Please enter a nonnegative number.");
+                    }
                 }
-
                 isValid = true;
             }
             catch (Exception e) {
@@ -138,6 +159,7 @@ public class ReportScreen {
 
         transactionList.customSearch(startDate, endDate, description, vendor, minAmount, maxAmount);
     }
+
     // *** TEST METHODS ***
 
 //    private static void reportMonthToDate() {

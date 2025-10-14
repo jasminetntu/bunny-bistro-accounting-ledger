@@ -62,8 +62,6 @@ public class TransactionList {
 
     // *** DISPLAY METHODS ***
 
-
-
     public void displayAll() {
         System.out.println("\n•··· All Transactions ···•");
 
@@ -159,9 +157,47 @@ public class TransactionList {
 
     public void customSearch(LocalDate startDate, LocalDate endDate, String description,
                              String vendor, double minAmount, double maxAmount) {
-        System.out.println("*** Performing Custom Search ***");
+        System.out.println("\n*** Performing Custom Search ***");
 
-        Stream tempStream = transactions.stream();
+        Stream<Transaction> tempStream = transactions.stream();
+
+        // --> for each if statement, checks if user left "blank" by checking default values
+
+        if (startDate != null) {
+            //filter by: date >= startDate
+            tempStream = tempStream.filter(t -> !t.getDate().isBefore(startDate));
+
+            //test
+        }
+
+        if (endDate != null) {
+            //filter by: date <= endDate
+            tempStream = tempStream.filter(t -> !t.getDate().isAfter(endDate));
+        }
+
+        if (!description.isEmpty()) {
+            //filter by: matching description (case-insensitive)
+            tempStream = tempStream.filter(t -> t.getDescription().equalsIgnoreCase(description));
+        }
+
+        if (!vendor.isEmpty()) {
+            //filter by: matching vendor (case-insensitive)
+            tempStream = tempStream.filter(t -> t.getVendor().equalsIgnoreCase(vendor));
+        }
+
+        if (minAmount != 0) {
+            //filter by: abs(amount) >= minAmount
+            tempStream = tempStream.filter(t -> Math.abs(t.getAmount()) >= minAmount);
+        }
+
+        if (maxAmount != 0) {
+            //filter by: abs(amount) <= maxAmount
+            tempStream = tempStream.filter(t -> Math.abs(t.getAmount()) <= maxAmount);
+        }
+
+        //sort by most recent and print
+        tempStream.sorted(SORT_BY_MOST_RECENT)
+                .forEach(t -> System.out.println("> " + t));
     }
 
 }

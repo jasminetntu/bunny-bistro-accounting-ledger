@@ -84,8 +84,6 @@ public class HomeScreen {
     private static void makePayment(Scanner scnr, TransactionList transactionList) {
         //System.out.println("TEST: makePayment() entered");
 
-        //TODO: Maybe need to get debit card info as well?
-
         System.out.print("Enter payment description: ");
         String description = scnr.nextLine().trim();
         System.out.print("Enter recipient of payment: ");
