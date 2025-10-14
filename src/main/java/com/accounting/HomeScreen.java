@@ -16,7 +16,7 @@ public class HomeScreen {
      * @param scnr Scanner objects
      * @param transactionList TransactionList object containing arraylist of transactions
      */
-    public static void showHome(Scanner scnr, TransactionList transactionList) {
+    public void showHome(Scanner scnr, TransactionList transactionList, Utility util) {
         boolean isRunning = true;
         HomeOption homeChoice;
 
@@ -26,7 +26,7 @@ public class HomeScreen {
                        ∩_∩
                      („• •„)
                     •··U U·············•··················•""" +
-                    Utility.boldString("\n\t\t\t\tHome") +
+                    util.boldString("\n\t\t\t\tHome") +
                     """
                     
                     •··················•··················•
@@ -47,8 +47,10 @@ public class HomeScreen {
                     case MAKE_PAYMENT -> makePayment(scnr, transactionList);
                     case LEDGER -> {
                         System.out.println("\n⊹ ࣪ ˖ Accessing ledger...");
-                        Utility.loadingBar();
-                        LedgerScreen.showLedger(scnr, transactionList);
+                        util.loadingBar();
+
+                        LedgerScreen ls = new LedgerScreen();
+                        ls.showLedger(scnr, transactionList, util);
                     }
                     case EXIT -> {
                         System.out.println("""
@@ -64,7 +66,7 @@ public class HomeScreen {
                 }
 
                 if (!homeChoice.equals(HomeOption.EXIT) && !homeChoice.equals(HomeOption.LEDGER)) {
-                    Utility.waitForKey(scnr);
+                    util.waitForKey(scnr);
                 }
             }
             catch (IllegalArgumentException e) {
@@ -82,7 +84,7 @@ public class HomeScreen {
      * @param scnr Scanner object
      * @param transactionList TransactionList object containing arraylist of transactions
      */
-    private static void addDeposit(Scanner scnr, TransactionList transactionList) {
+    private void addDeposit(Scanner scnr, TransactionList transactionList) {
         //System.out.println("TEST: addDeposit() entered");
         String description = "";
         String vendor = "";
@@ -134,7 +136,7 @@ public class HomeScreen {
      * @param scnr Scanner object
      * @param transactionList TransactionList object containing arraylist of transactions
      */
-    private static void makePayment(Scanner scnr, TransactionList transactionList) {
+    private void makePayment(Scanner scnr, TransactionList transactionList) {
         //System.out.println("TEST: makePayment() entered");
 
         System.out.print("Enter payment description: ");

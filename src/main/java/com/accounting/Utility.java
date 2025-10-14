@@ -4,16 +4,16 @@ import java.util.Scanner;
 import java.time.*;
 
 public class Utility {
-    public static String boldString(String stringToBold) {
+    public String boldString(String stringToBold) {
         return "\u001B[1m" + stringToBold + "\u001B[0m";
     }
 
-    public static void waitForKey(Scanner scnr) {
+    public void waitForKey(Scanner scnr) {
         System.out.print("\n> Press enter to continue.");
         scnr.nextLine();
     }
 
-    public static void loadingBar() throws InterruptedException {
+    public void loadingBar() throws InterruptedException {
         for (int i = 0; i < 10; ++i) {
             Thread.sleep(150);
             //System.out.print("𐙚 ₍ᐢ..ᐢ₎ ");

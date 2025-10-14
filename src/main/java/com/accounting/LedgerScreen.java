@@ -16,7 +16,7 @@ public class LedgerScreen {
      * @param scnr Scanner objects
      * @param transactionList TransactionList object containing arraylist of transactions
      */
-    public static void showLedger(Scanner scnr, TransactionList transactionList) {
+    public void showLedger(Scanner scnr, TransactionList transactionList, Utility util) {
         boolean isRunning = true;
         LedgerOption ledgerChoice;
 
@@ -26,7 +26,7 @@ public class LedgerScreen {
                        ∩_∩
                      („• •„)
                     •··U U·············•··················•""" +
-                    Utility.boldString("\n\t\t\t\tLedger") +
+                    util.boldString("\n\t\t\t\tLedger") +
                     """
                     
                     •··················•··················•
@@ -49,18 +49,20 @@ public class LedgerScreen {
                     case DISPLAY_PAYMENTS -> transactionList.displayAllPayments();
                     case REPORT -> {
                         System.out.println("\n⊹ ࣪ ˖ Accessing reports...");
-                        Utility.loadingBar();
-                        ReportScreen.showReport(scnr, transactionList);
+                        util.loadingBar();
+
+                        ReportScreen rs = new ReportScreen();
+                        rs.showReport(scnr, transactionList, util);
                     }
                     case BACK_HOME -> {
                         System.out.println("\n⊹ ࣪ ˖ Returning to home...");
-                        Utility.loadingBar();
+                        util.loadingBar();
                         isRunning = false;
                     }
                 }
 
                 if (!ledgerChoice.equals(LedgerOption.BACK_HOME) && !ledgerChoice.equals(LedgerOption.REPORT)) {
-                    Utility.waitForKey(scnr);
+                    util.waitForKey(scnr);
                 }
             }
             catch (IllegalArgumentException e) {

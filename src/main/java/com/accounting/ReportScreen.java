@@ -18,7 +18,7 @@ public class ReportScreen {
      * @param scnr Scanner objects
      * @param transactionList TransactionList object containing arraylist of transactions
      */
-    public static void showReport(Scanner scnr, TransactionList transactionList) {
+    public void showReport(Scanner scnr, TransactionList transactionList, Utility util) {
         boolean isRunning = true;
         ReportOption reportChoice;
 
@@ -28,7 +28,7 @@ public class ReportScreen {
                        ∩_∩
                      („• •„)
                     •··U U·············•··················•""" +
-                    Utility.boldString("\n\t\t\t\tReports") +
+                    util.boldString("\n\t\t\t\tReports") +
                     """
                     
                     •··················•··················•
@@ -61,13 +61,13 @@ public class ReportScreen {
                     case CUSTOM_SEARCH -> getCustomSearchInputs(scnr, transactionList);
                     case BACK_LEDGER -> {
                         System.out.println("\n⊹ ࣪ ˖ Returning to ledger...");
-                        Utility.loadingBar();
+                        util.loadingBar();
                         isRunning = false;
                     }
                 }
 
                 if (!reportChoice.equals(ReportOption.BACK_LEDGER)) {
-                    Utility.waitForKey(scnr);
+                    util.waitForKey(scnr);
                 }
             }
             catch (IllegalArgumentException e) {
@@ -85,7 +85,7 @@ public class ReportScreen {
      * @param scnr Scanner object
      * @param transactionList TransactionList object containing arraylist of transactions
      */
-    private static void getCustomSearchInputs(Scanner scnr, TransactionList transactionList) {
+    private void getCustomSearchInputs(Scanner scnr, TransactionList transactionList) {
         System.out.println("\n> For the following, please type your desired value OR enter to leave blank.");
 
         // initialize necessary values

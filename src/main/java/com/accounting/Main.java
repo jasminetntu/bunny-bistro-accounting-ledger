@@ -16,17 +16,19 @@ public class Main {
 
         Scanner scnr = new Scanner(System.in);
         TransactionList transactionList = new TransactionList();
+        Utility util = new Utility();
 
         //load CSV file of transactions
         transactionList.loadFromCsv(FILE_PATH);
 
         //title
         System.out.print("•·················•·················•" +
-                Utility.boldString("\n\t\tBunny Bistro") + "🍵ིྀ༘₍ᐢ. .ᐢ₎₊˚⊹" +
+                util.boldString("\n\t\tBunny Bistro") + "🍵ིྀ༘₍ᐢ. .ᐢ₎₊˚⊹" +
                 "\n\t\t> Sales & Purchases <");
 
         //enter home screen
-        HomeScreen.showHome(scnr, transactionList);
+        HomeScreen hs = new HomeScreen();
+        hs.showHome(scnr, transactionList, util);
 
         //save new transactions when exited
         transactionList.saveToCsv(FILE_PATH);
