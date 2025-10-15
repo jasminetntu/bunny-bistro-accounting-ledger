@@ -22,8 +22,9 @@ public class Main {
         transactionList.loadFromCsv(FILE_PATH);
 
         //title
-        System.out.print("•·················•·················•" +
-                util.boldString("\n\t\tBunny Bistro") + "🍵ིྀ༘₍ᐢ. .ᐢ₎₊˚⊹" +
+        System.out.println("•·················•·················•" +
+                util.boldString("\n\t\t\tBunny Bistro") +
+                "\n\t\t\t🍵ིྀ༘₍ᐢ. .ᐢ₎₊˚⊹" +
                 "\n\t\t> Sales & Purchases <");
 
         //enter home screen
