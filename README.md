@@ -61,7 +61,7 @@ It was both challenging and fun to find a workaround to checking whether my stre
 <img width="323" height="400" alt="image" src="https://github.com/user-attachments/assets/68dfcdca-7588-412a-abd8-62d9b0aea11f" />
 
 ### Display Transaction Example
-insert ss here
+insert ss here!
 
 ### Report Example
 insert ss here
