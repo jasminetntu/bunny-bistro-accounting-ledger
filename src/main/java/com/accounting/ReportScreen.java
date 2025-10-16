@@ -58,7 +58,7 @@ public class ReportScreen {
 
                         transactionList.searchByVendor(vendorName);
                     }
-                    case CUSTOM_SEARCH -> getCustomSearchInputs(scnr, transactionList);
+                    case CUSTOM_SEARCH -> getCustomSearchInputs(scnr, transactionList, util);
                     case BACK_LEDGER -> {
                         System.out.println("\n⊹ ࣪ ˖ Returning to ledger...");
                         util.loadingBar();
@@ -80,18 +80,19 @@ public class ReportScreen {
     }
 
     /**
-     * Obtains custom search inputs (start date, end date, description, vendor, min/max amount).
+     * Obtains custom search inputs (start date, end date, description, vendor, deposit/payment/both, min/max amount).
      * Passes inputs to getCustomSearchInputs method to filter and print desired transactions.
      * @param scnr Scanner object
      * @param transactionList TransactionList object containing arraylist of transactions
      */
-    private void getCustomSearchInputs(Scanner scnr, TransactionList transactionList) {
+    private void getCustomSearchInputs(Scanner scnr, TransactionList transactionList, Utility util) {
         System.out.println("\n> For the following, please type your desired value OR enter to leave blank.");
 
         // initialize necessary values
         String input;
         LocalDate startDate = null;
         LocalDate endDate = null;
+        String depositOrPayment = "";
         double minAmount = 0;
         double maxAmount = 0;
 
@@ -139,6 +140,28 @@ public class ReportScreen {
         System.out.print("Vendor: ");
         String vendor = scnr.nextLine().trim();
 
+        //get deposit or payment
+        isValid = false;
+        while (!isValid) {
+            System.out.print("Deposit (D) or payment (P) or both (Enter): ");
+            input = scnr.nextLine().trim();
+
+            if (input.isEmpty()) { //empty
+                isValid = true;
+            }
+            else if (input.equalsIgnoreCase("d")) { //deposit
+                depositOrPayment = "deposit";
+                isValid = true;
+            }
+            else if (input.equalsIgnoreCase("p")) { //payment
+                depositOrPayment = "payment";
+                isValid = true;
+            }
+            else { //invalid input
+                System.out.println("Invalid option. Please input D or P or press enter.");
+            }
+        }
+
         //get min amount
         isValid = false;
         while (!isValid) {
@@ -146,15 +169,19 @@ public class ReportScreen {
                 System.out.print("Minimum amount: ");
                 input = scnr.nextLine().trim();
 
-                if (!input.isEmpty()) {
+                if (input.isEmpty()) { //empty
+                    isValid = true;
+                }
+                else { //non empty
                     minAmount = Double.parseDouble(input);
 
                     if (minAmount < 0) {
                         System.out.println("Invalid amount. Please enter a nonnegative number.");
                     }
+                    else {
+                        isValid = true;
+                    }
                 }
-
-                isValid = true;
             }
             catch (Exception e) {
                 System.out.println("Invalid amount. Please enter a nonnegative number.");
@@ -168,20 +195,33 @@ public class ReportScreen {
                 System.out.print("Maximum amount: ");
                 input = scnr.nextLine().trim();
 
-                if (!input.isEmpty()) {
+                if (input.isEmpty()) { //empty
+                    isValid = true;
+                }
+                else { //nonempty
                     maxAmount = Double.parseDouble(input);
 
                     if (maxAmount < 0) {
                         System.out.println("Invalid amount. Please enter a nonnegative number.");
                     }
+                    else {
+                        isValid = true;
+                    }
                 }
-                isValid = true;
             }
             catch (Exception e) {
                 System.out.println("Invalid amount. Please enter a nonnegative number.");
             }
         }
 
-        transactionList.customSearch(startDate, endDate, description, vendor, minAmount, maxAmount);
+        System.out.println("\n⊹ ࣪ ˖ Searching...");
+
+        try {
+            util.loadingBar();
+        } catch (InterruptedException e) {
+            System.out.println("Error: Interrupted exception");
+        }
+
+        transactionList.customSearch(startDate, endDate, description, vendor, depositOrPayment, minAmount, maxAmount);
     }
 }

@@ -14,7 +14,17 @@ Allows you to add deposits, make payments, and view your past transactions based
 
 ### 💭 Interesting Piece of Code
 ``` java
-insert code here
+//collect matching results into list to check if empty
+List<Transaction> matchingTransactions = tempStream.toList();
+
+if (matchingTransactions.isEmpty()) {
+    System.out.println("No matching transactions found.");
+}
+else { //print results only if there are matching transactions
+    matchingTransactions.stream()
+        .sorted(SORT_BY_MOST_RECENT)
+        .forEach(t -> System.out.println("> " + t));
+}
 ```
 
 insert explanation here

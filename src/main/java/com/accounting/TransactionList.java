@@ -273,8 +273,8 @@ public class TransactionList {
      * May skip some details depending on if user left option blank.
      */
     public void customSearch(LocalDate startDate, LocalDate endDate, String description,
-                             String vendor, double minAmount, double maxAmount) {
-        System.out.println("\n•··· Performing Custom Search ···•");
+                             String vendor, String depositOrPayment, double minAmount, double maxAmount) {
+        System.out.println("\n•··· Custom Search Results···•");
 
         Stream<Transaction> tempStream = transactions.stream();
 
@@ -283,8 +283,6 @@ public class TransactionList {
         if (startDate != null) {
             //filter by: date >= startDate
             tempStream = tempStream.filter(t -> !t.getDate().isBefore(startDate));
-
-            //test
         }
 
         if (endDate != null) {
@@ -302,13 +300,22 @@ public class TransactionList {
             tempStream = tempStream.filter(t -> t.getVendor().equalsIgnoreCase(vendor));
         }
 
+        if (depositOrPayment.equalsIgnoreCase("deposit")) {
+            //filter by: positive amounts
+            tempStream = tempStream.filter(t -> t.getAmount() >= 0);
+        }
+        else if (depositOrPayment.equalsIgnoreCase("payment")) {
+            //filter by: negative amounts
+            tempStream = tempStream.filter(t -> t.getAmount() <= 0);
+        } //don't filter if both dep and pay
+
         if (minAmount != 0) {
-            //filter by: abs(amount) >= minAmount
+            //filter by: abs(amount) >= minAmount | abs() -> works for both dep and pay
             tempStream = tempStream.filter(t -> Math.abs(t.getAmount()) >= minAmount);
         }
 
         if (maxAmount != 0) {
-            //filter by: abs(amount) <= maxAmount
+            //filter by: abs(amount) <= maxAmount | abs() -> works for both dep and pay
             tempStream = tempStream.filter(t -> Math.abs(t.getAmount()) <= maxAmount);
         }
 
@@ -325,5 +332,4 @@ public class TransactionList {
         }
 
     }
-
 }
