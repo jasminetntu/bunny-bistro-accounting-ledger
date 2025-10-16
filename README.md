@@ -51,22 +51,21 @@ It was both challenging and fun to find a workaround to checking whether my stre
 
 ## 📸 Screenshots
 
-### Home Screen
+### .☘︎ ݁˖ Home Screen
 <img width="323" height="396" alt="image" src="https://github.com/user-attachments/assets/6c794285-0d25-45a7-bf66-cd0107d53b52" />
 
-### Ledger Screen
+### .☘︎ ݁˖ Ledger Screen
 <img width="323" height="367" alt="image" src="https://github.com/user-attachments/assets/906f7dbb-e17b-4ec4-a24f-c802103cf6b2" />
 
-### Report Screen
+### .☘︎ ݁˖ Report Screen
 <img width="323" height="400" alt="image" src="https://github.com/user-attachments/assets/68dfcdca-7588-412a-abd8-62d9b0aea11f" />
 
-### Display Transaction Example
-insert ss here!
+### .☘︎ ݁˖ Display Example (Payments)
+<img width="410" height="596" alt="image" src="https://github.com/user-attachments/assets/22a0e5c2-1602-4b57-a6c3-9b5468129fc5" />
 
-### Report Example
-insert ss here
+### .☘︎ ݁˖ Report Example (Custom Search)
+<img width="609" height="688" alt="image" src="https://github.com/user-attachments/assets/8be6be42-3b5f-4d0a-b3b8-86d9a6c3c201" />
 
 ### CSV File
-insert ss here
+<img width="714" height="252" alt="image" src="https://github.com/user-attachments/assets/a659c9ab-f46d-4c61-8dcb-f178bdc009d4" />
 
----
