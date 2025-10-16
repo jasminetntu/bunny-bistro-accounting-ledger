@@ -8,7 +8,9 @@
 
 ### 🐰 Description
 
-insert description here
+An accounting ledger app to keep track of deposits & payments of a cafe named "Bunny Bistro." 
+Allows you to add deposits, make payments, and view your past transactions based on pre-set or custom filters. 
+
 
 ### 💭 Interesting Piece of Code
 ``` java
