@@ -1,7 +1,7 @@
 # Bunny Bistro Accounting Ledger 🍵₊˚⊹
 > **Capstone 1: Accounting Ledger App**
 > 
-> Year Up United (Bay Bytes) - _Technical Academy_
+> Year Up United (Bay Bytes) - _Technical Academy Fall 2025_
 ---
 
 ## 🐰 Description
@@ -52,13 +52,13 @@ It was both challenging and fun to find a workaround to checking whether my stre
 ## 📸 Screenshots
 
 ### Home Screen
-insert ss here
+<img width="323" height="396" alt="image" src="https://github.com/user-attachments/assets/6c794285-0d25-45a7-bf66-cd0107d53b52" />
 
 ### Ledger Screen
-insert ss here
+<img width="323" height="367" alt="image" src="https://github.com/user-attachments/assets/906f7dbb-e17b-4ec4-a24f-c802103cf6b2" />
 
 ### Report Screen
-insert ss here
+<img width="323" height="400" alt="image" src="https://github.com/user-attachments/assets/68dfcdca-7588-412a-abd8-62d9b0aea11f" />
 
 ### Display Transaction Example
 insert ss here
