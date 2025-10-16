@@ -22,6 +22,8 @@ Built entirely in Java to practice application development, specifically to gain
 
 ### 💭 Interesting Piece of Code
 ``` java
+//the following is taken from line 322 of TransactionList.java
+
 //collect matching results into list to check if empty
 List<Transaction> matchingTransactions = tempStream.toList();
 
