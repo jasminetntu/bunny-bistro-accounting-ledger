@@ -51,6 +51,31 @@ It was both challenging and fun to find a workaround to checking whether my stre
 
 ---
 
+## 📁 File Structure
+```
+src/
+├── main/
+│   ├── java/
+│   │   ├── com.accounting/
+│   │   │   ├── Main.java               //entry
+│   │   │   │   
+│   │   │   ├── HomeScreen.java         //menu
+│   │   │   ├── LedgerScreen.java       //menu
+│   │   │   ├── ReportScreen.java       //menu
+│   │   │   │   
+│   │   │   ├── Utility.java            //helper class
+│   │   │   ├── TransactionList.java    //manager class
+│   │   │   ├── Transaction.java        //model class
+│   │   │   │   
+│   │   │   ├── HomeOption.java         //enum
+│   │   │   ├── LegderOption.java       //enum
+│   │   │   └── ReportOption.java       //enum
+│   └── resources/
+│       └── transactions.csv
+```
+
+---
+
 ## 📸 Screenshots
 
 ### .☘︎ ݁˖ Home Screen
