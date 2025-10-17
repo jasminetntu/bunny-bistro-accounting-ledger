@@ -95,8 +95,8 @@ public class HomeScreen {
             System.out.print("Enter deposit description: ");
             description = scnr.nextLine().trim();
 
-            if (description.isEmpty()) {
-                System.out.println("Description cannot be empty. Try again.");
+            if (description.isEmpty()) { //handle empty input
+                System.out.println("❌ Description cannot be empty. Try again.");
             }
             else {
                 isValid = true;
@@ -108,8 +108,8 @@ public class HomeScreen {
             System.out.print("Enter deposit vendor: ");
             vendor = scnr.nextLine().trim();
 
-            if (vendor.isEmpty()) {
-                System.out.println("Vendor cannot be empty. Try again.");
+            if (vendor.isEmpty()) { //handle empty input
+                System.out.println("❌ Vendor cannot be empty. Try again.");
             }
             else {
                 isValid = true;
@@ -123,7 +123,7 @@ public class HomeScreen {
             try {
                 amount = Double.parseDouble(scnr.nextLine());
 
-                if (amount < 0) {
+                if (amount < 0) { //handle negative input
                     System.out.println("❌ Invalid amount. Must be a positive number.");
                 }
                 else {
@@ -143,22 +143,44 @@ public class HomeScreen {
      * @param transactionList TransactionList object containing arraylist of transactions
      */
     private void makePayment(Scanner scnr, TransactionList transactionList) {
-        //System.out.println("TEST: makePayment() entered");
-
-        System.out.print("Enter payment description: ");
-        String description = scnr.nextLine().trim();
-        System.out.print("Enter recipient of payment: ");
-        String vendor = scnr.nextLine().trim();
+        String description = "";
+        String vendor = "";
+        double amount = 0;
 
         boolean isValid = false;
-        double amount = 0;
+        while (!isValid) {
+            System.out.print("Enter deposit description: ");
+            description = scnr.nextLine().trim();
+
+            if (description.isEmpty()) { //handle empty input
+                System.out.println("❌ Description cannot be empty. Try again.");
+            }
+            else {
+                isValid = true;
+            }
+        }
+
+        isValid = false;
+        while (!isValid) {
+            System.out.print("Enter deposit vendor: ");
+            vendor = scnr.nextLine().trim();
+
+            if (vendor.isEmpty()) { //handle empty input
+                System.out.println("❌ Vendor cannot be empty. Try again.");
+            }
+            else {
+                isValid = true;
+            }
+        }
+
+        isValid = false;
         while (!isValid) {
             System.out.print("Enter payment $ amount: ");
 
             try {
                 amount = Double.parseDouble(scnr.nextLine());
 
-                if (amount < 0) {
+                if (amount < 0) { //handle negative input
                     System.out.println("❌ Invalid amount. Must be a positive number.");
                 }
                 else {

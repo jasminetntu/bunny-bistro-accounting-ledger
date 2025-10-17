@@ -31,7 +31,7 @@ public class LedgerScreen {
                     
                     •··················•··················•
                     Display...
-                        (A) 💰All Transactions
+                        (A) 💰 All Transactions
                         (D) 💵 Deposits
                         (P) 💸 Payments
                         (R) 📚 Reports
@@ -60,13 +60,13 @@ public class LedgerScreen {
                         System.out.println(util.separator());
                     }
                     case REPORT -> {
-                        util.loadingBar("Accessing reports...");
+                        util.loadingBar("📚 Accessing reports...");
 
                         ReportScreen rs = new ReportScreen();
                         rs.showReport(scnr, transactionList, util);
                     }
                     case BACK_HOME -> {
-                        util.loadingBar("Returning to home...");
+                        util.loadingBar("🌸 Returning to home...");
                         isRunning = false;
                     }
                 }

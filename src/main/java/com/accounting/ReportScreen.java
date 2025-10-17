@@ -80,7 +80,7 @@ public class ReportScreen {
                     }
                     case CUSTOM_SEARCH -> getCustomSearchInputs(scnr, transactionList, util);
                     case BACK_LEDGER -> {
-                        util.loadingBar("Returning to ledger...");
+                        util.loadingBar("📝 Returning to ledger...");
                         isRunning = false;
                     }
                 }
