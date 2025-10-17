@@ -32,9 +32,12 @@ public class Utility {
 
     /**
      * Prints a 1500 ms (1.5 s) loading bar.
+     * @param loadingMessage the message to print before loading bar
      * @throws InterruptedException if sleep is interrupted
      */
-    public void loadingBar() throws InterruptedException {
+    public void loadingBar(String loadingMessage) throws InterruptedException {
+        System.out.println("\n⊹ ࣪ ˖ " + loadingMessage);
+
         for (int i = 0; i < 10; ++i) {
             Thread.sleep(150);
             System.out.print("▒▒▒");

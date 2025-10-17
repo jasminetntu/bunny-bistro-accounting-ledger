@@ -56,12 +56,12 @@ public class ReportScreen {
                         System.out.print("\nEnter vendor name: ");
                         String vendorName = scnr.nextLine();
 
+                        util.loadingBar("Searching...");
                         transactionList.searchByVendor(vendorName);
                     }
                     case CUSTOM_SEARCH -> getCustomSearchInputs(scnr, transactionList, util);
                     case BACK_LEDGER -> {
-                        System.out.println("\n⊹ ࣪ ˖ Returning to ledger...");
-                        util.loadingBar();
+                        util.loadingBar("Returning to ledger...");
                         isRunning = false;
                     }
                 }
@@ -214,10 +214,8 @@ public class ReportScreen {
             }
         }
 
-        System.out.println("\n⊹ ࣪ ˖ Searching...");
-
         try {
-            util.loadingBar();
+            util.loadingBar("Searching...");
         } catch (InterruptedException e) {
             System.out.println("Error: Interrupted exception");
         }

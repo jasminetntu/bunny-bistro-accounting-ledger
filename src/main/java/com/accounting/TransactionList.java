@@ -249,12 +249,12 @@ public class TransactionList {
      * Displays a report of all transactions with a specified vendor.
      */
     public void searchByVendor(String vendorToSearch) {
-        System.out.println("\n•··· Searching by Vendor ···•");
+        System.out.println("\n•··· Vendor Search Results ···•");
 
         //collect matching results into list to check if empty
         List<Transaction> matchingTransactions = transactions.stream()
                 //filters based on: matching vendor
-                .filter(t -> t.getVendor().equalsIgnoreCase(vendorToSearch))
+                .filter(t -> t.getVendor().toLowerCase().contains(vendorToSearch.toLowerCase()))
                 .toList();
 
         if (matchingTransactions.isEmpty()) {
@@ -292,12 +292,12 @@ public class TransactionList {
 
         if (!description.isEmpty()) {
             //filter by: matching description (case-insensitive)
-            tempStream = tempStream.filter(t -> t.getDescription().equalsIgnoreCase(description));
+            tempStream = tempStream.filter(t -> t.getDescription().toLowerCase().contains(description.toLowerCase()));
         }
 
         if (!vendor.isEmpty()) {
             //filter by: matching vendor (case-insensitive)
-            tempStream = tempStream.filter(t -> t.getVendor().equalsIgnoreCase(vendor));
+            tempStream = tempStream.filter(t -> t.getVendor().toLowerCase().contains(vendor.toLowerCase()));
         }
 
         if (depositOrPayment.equalsIgnoreCase("deposit")) {

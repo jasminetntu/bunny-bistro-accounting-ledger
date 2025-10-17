@@ -48,15 +48,13 @@ public class LedgerScreen {
                     case DISPLAY_DEPOSITS -> transactionList.displayAllDeposits();
                     case DISPLAY_PAYMENTS -> transactionList.displayAllPayments();
                     case REPORT -> {
-                        System.out.println("\n⊹ ࣪ ˖ Accessing reports...");
-                        util.loadingBar();
+                        util.loadingBar("Accessing reports...");
 
                         ReportScreen rs = new ReportScreen();
                         rs.showReport(scnr, transactionList, util);
                     }
                     case BACK_HOME -> {
-                        System.out.println("\n⊹ ࣪ ˖ Returning to home...");
-                        util.loadingBar();
+                        util.loadingBar("Returning to home...");
                         isRunning = false;
                     }
                 }

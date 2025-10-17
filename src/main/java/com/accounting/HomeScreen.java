@@ -46,13 +46,13 @@ public class HomeScreen {
                     case ADD_DEPOSIT -> addDeposit(scnr, transactionList);
                     case MAKE_PAYMENT -> makePayment(scnr, transactionList);
                     case LEDGER -> {
-                        System.out.println("\n⊹ ࣪ ˖ Accessing ledger...");
-                        util.loadingBar();
+                        util.loadingBar("Accessing ledger...");
 
                         LedgerScreen ls = new LedgerScreen();
                         ls.showLedger(scnr, transactionList, util);
                     }
                     case EXIT -> {
+                        util.loadingBar("Exiting...");
                         System.out.println("""
                                       
                                        ⊹ ࣪ ˖ Goodbye! ˖ ࣪ ⊹
