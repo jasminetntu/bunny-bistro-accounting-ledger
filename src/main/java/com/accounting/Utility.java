@@ -7,7 +7,6 @@
 package com.accounting;
 
 import java.util.Scanner;
-import java.time.*;
 
 public class Utility {
     /**
@@ -26,7 +25,7 @@ public class Utility {
      * @param scnr Scanner object
      */
     public void waitForKey(Scanner scnr) {
-        System.out.print("\n> Press enter to continue.");
+        System.out.print("\n> Press ENTER to continue.");
         scnr.nextLine();
     }
 
@@ -44,5 +43,27 @@ public class Utility {
         }
         System.out.println();
         Thread.sleep(200);
+    }
+
+    /**
+     * Returns a horizontal dotted line separator for a table of Transactions
+     * @return String containing horizontal line separator
+     */
+    public String separator() {
+        return "•" + "·".repeat(10) + //date
+                "•" + "·".repeat(11) + //time
+                "•" + "·".repeat(36) + //description
+                "•" + "·".repeat(26) + //vendor
+                "•" + "·".repeat(15) + "•"; //amount
+    }
+
+    /**
+     * Returns the header for a table of Transactions, including
+     * Date, Time, Description, Vendor, and Amount
+     * @return String containing table header
+     */
+    public String tableHeader() {
+        return String.format(separator() + "\n %-10s  %-11s  %-35s  %-25s  %-15s\n" + separator(),
+                "Date", "Time", "Description", "Vendor", "Amount");
     }
 }

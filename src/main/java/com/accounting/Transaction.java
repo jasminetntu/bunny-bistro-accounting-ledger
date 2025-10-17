@@ -114,32 +114,27 @@ public class Transaction {
     // *** OTHER ***
 
     /**
-     * Returns a string in the following format:
-     * {MMM dd, yyyy} | {hh:mm:ss a}
-     *      Description: {description}
-     *      Vendor: {vendor}
-     *      Amount: +/-${amount}
+     * Returns a string in the following format with spaces in between each item for table format:
+     * MM/dd/yyyy hh:mm a {description} {vendor} +/-${amount}
      *
      * @return An expanded string of the transaction details.
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy | hh:mm:ss a");
-
-        //append in 12-hour time for user readability
-        sb.append(formatter.format(dateAndTime))
-                .append("\n\tDescription: ").append(description)
-                .append("\n\tVendor: ").append(vendor);
-
-        //append amount based on deposit or payment
+        //get formatted amount based on deposit or payment
+        String formatAmount;
         if (amount < 0) { //payment
-            sb.append(String.format("\n\tAmount: -$%.2f", amount * -1));
+            formatAmount = String.format("-$%.2f", amount * -1);
         }
         else { //deposit
-            sb.append(String.format("\n\tAmount: +$%.2f", amount));
+            formatAmount = String.format("+$%.2f", amount);
         }
-        return sb.toString();
+
+        //return formatted string
+        return String.format("%-11s  %-11s  %-35s  %-25s  %-10s",
+                getDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")),
+                getTime().format(DateTimeFormatter.ofPattern("hh:mm a")),
+                description, vendor, formatAmount);
     }
 
     /**

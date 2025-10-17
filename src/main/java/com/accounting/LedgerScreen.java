@@ -44,9 +44,21 @@ public class LedgerScreen {
 
                 //only proceeds to switch if input is valid
                 switch (ledgerChoice) {
-                    case DISPLAY_ALL -> transactionList.displayAll();
-                    case DISPLAY_DEPOSITS -> transactionList.displayAllDeposits();
-                    case DISPLAY_PAYMENTS -> transactionList.displayAllPayments();
+                    case DISPLAY_ALL -> {
+                        System.out.println(util.boldString("\n⊹ ࣪ ˖ All Transactions\n") + util.tableHeader());
+                        transactionList.displayAll();
+                        System.out.println(util.separator());
+                    }
+                    case DISPLAY_DEPOSITS -> {
+                        System.out.println(util.boldString("\n⊹ ࣪ ˖ All Deposits\n") + util.tableHeader());
+                        transactionList.displayAllDeposits();
+                        System.out.println(util.separator());
+                    }
+                    case DISPLAY_PAYMENTS -> {
+                        System.out.println(util.boldString("\n⊹ ࣪ ˖ All Payments\n") + util.tableHeader());
+                        transactionList.displayAllPayments();
+                        System.out.println(util.separator());
+                    }
                     case REPORT -> {
                         util.loadingBar("Accessing reports...");
 

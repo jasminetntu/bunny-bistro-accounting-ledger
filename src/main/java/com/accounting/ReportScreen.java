@@ -48,16 +48,35 @@ public class ReportScreen {
 
                 //only proceeds to switch if input is valid
                 switch (reportChoice) {
-                    case MONTH_TO_DATE -> transactionList.reportMonthToDate();
-                    case PREVIOUS_MONTH -> transactionList.reportPreviousMonth();
-                    case YEAR_TO_DATE -> transactionList.reportYearToDate();
-                    case PREVIOUS_YEAR -> transactionList.reportPreviousYear();
+                    case MONTH_TO_DATE -> {
+                        System.out.println(util.boldString("\n⊹ ࣪ ˖ Month To Date Report\n") + util.tableHeader());
+                        transactionList.reportMonthToDate();
+                        System.out.println(util.separator());
+                    }
+                    case PREVIOUS_MONTH -> {
+                        System.out.println(util.boldString("\n⊹ ࣪ ˖ Previous Month Report\n") + util.tableHeader());
+                        transactionList.reportPreviousMonth();
+                        System.out.println(util.separator());
+                    }
+                    case YEAR_TO_DATE -> {
+                        System.out.println(util.boldString("\n⊹ ࣪ ˖ Year To Date Report\n") + util.tableHeader());
+                        transactionList.reportYearToDate();
+                        System.out.println(util.separator());
+                    }
+                    case PREVIOUS_YEAR -> {
+                        System.out.println(util.boldString("\n⊹ ࣪ ˖ Previous Year Report\n") + util.tableHeader());
+                        transactionList.reportPreviousYear();
+                        System.out.println(util.separator());
+                    }
                     case SEARCH_BY_VENDOR -> {
                         System.out.print("\nEnter vendor name: ");
                         String vendorName = scnr.nextLine();
 
                         util.loadingBar("Searching...");
+
+                        System.out.println(util.boldString("\n⊹ ࣪ ˖ Vendor Search Results\n") + util.tableHeader());
                         transactionList.searchByVendor(vendorName);
+                        System.out.println(util.separator());
                     }
                     case CUSTOM_SEARCH -> getCustomSearchInputs(scnr, transactionList, util);
                     case BACK_LEDGER -> {
@@ -220,6 +239,8 @@ public class ReportScreen {
             System.out.println("Error: Interrupted exception");
         }
 
+        System.out.println(util.boldString("\n⊹ ࣪ ˖ Custom Search Results\n") + util.tableHeader());
         transactionList.customSearch(startDate, endDate, description, vendor, depositOrPayment, minAmount, maxAmount);
+        System.out.println(util.separator());
     }
 }

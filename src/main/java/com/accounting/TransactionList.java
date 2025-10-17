@@ -83,15 +83,13 @@ public class TransactionList {
      * Display all transactions, sorted by most recent.
      */
     public void displayAll() {
-        System.out.println("\n•··· All Transactions ···•");
-
         if (transactions.isEmpty()) {
             System.out.println("No transactions found.");
         }
         else {
             transactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
-                    .forEach(t -> System.out.println("> " + t));
+                    .forEach(System.out::println);
         }
     }
 
@@ -99,8 +97,6 @@ public class TransactionList {
      * Display all deposits, sorted by most recent.
      */
     public void displayAllDeposits() {
-        System.out.println("\n•··· All Deposits ···•");
-
         //collect matching results into list to check if empty
         List<Transaction> matchingTransactions = transactions.stream()
                 //filters based on: positive amounts
@@ -113,7 +109,7 @@ public class TransactionList {
         else { //print results only if there are matching transactions
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
-                    .forEach(t -> System.out.println("> " + t));
+                    .forEach(System.out::println);
         }
     }
 
@@ -121,8 +117,6 @@ public class TransactionList {
      * Display all payments, sorted by most recent.
      */
     public void displayAllPayments() {
-        System.out.println("\n•··· All Payments ···•");
-
         //collect matching results into list to check if empty
         List<Transaction> matchingTransactions = transactions.stream()
                 //filters based on: negative amounts
@@ -135,7 +129,7 @@ public class TransactionList {
         else { //print results only if there are matching transactions
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
-                    .forEach(t -> System.out.println("> " + t));
+                    .forEach(System.out::println);
         }
     }
 
@@ -145,9 +139,6 @@ public class TransactionList {
      * Displays a report of all transactions in the current month.
      */
     public void reportMonthToDate() {
-        // System.out.println("TEST: reportMonthToDate() entered");
-        System.out.println("\n•··· Month To Date Report ···•");
-
         LocalDate first_day_of_month = LocalDate.now().withDayOfMonth(1);
 
         //collect matching results into list to check if empty
@@ -162,7 +153,7 @@ public class TransactionList {
         else { //print results only if there are matching transactions
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
-                    .forEach(t -> System.out.println("> " + t));
+                    .forEach(System.out::println);
         }
     }
 
@@ -170,9 +161,6 @@ public class TransactionList {
      * Displays a report of all transactions in the previous month.
      */
     public void reportPreviousMonth() {
-        //System.out.println("TEST: reportPreviousMonth() entered");
-        System.out.println("\n•··· Previous Month Report ···•");
-
         LocalDate first_day_of_curr_month = LocalDate.now().withDayOfMonth(1);
         LocalDate first_day_of_prev_month = LocalDate.now().withDayOfMonth(1).minusMonths(1);
 
@@ -189,7 +177,7 @@ public class TransactionList {
         else { //print results only if there are matching transactions
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
-                    .forEach(t -> System.out.println("> " + t));
+                    .forEach(System.out::println);
         }
     }
 
@@ -197,9 +185,6 @@ public class TransactionList {
      * Displays a report of all transactions in the current year.
      */
     public void reportYearToDate() {
-        //System.out.println("TEST: reportYearToDate() entered");
-        System.out.println("\n•··· Year To Date Report ···•");
-
         LocalDate first_day_of_curr_year = LocalDate.of(LocalDate.now().getYear(), 1, 1);
 
         //collect matching results into list to check if empty
@@ -214,7 +199,7 @@ public class TransactionList {
         else { //print results only if there are matching transactions
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
-                    .forEach(t -> System.out.println("> " + t));
+                    .forEach(System.out::println);
         }
     }
 
@@ -222,9 +207,6 @@ public class TransactionList {
      * Displays a report of all transactions in the previous year.
      */
     public void reportPreviousYear() {
-        // System.out.println("TEST: reportPreviousYear() entered");
-        System.out.println("\n•··· Previous Year Report ···•");
-
         LocalDate first_day_of_prev_year = LocalDate.of(LocalDate.now().getYear() - 1, 1, 1);
         LocalDate last_day_of_prev_year = LocalDate.of(LocalDate.now().getYear() - 1, 1, 31);
 
@@ -241,7 +223,7 @@ public class TransactionList {
         else { //print results only if there are matching transactions
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
-                    .forEach(t -> System.out.println("> " + t));
+                    .forEach(System.out::println);
         }
     }
 
@@ -249,8 +231,6 @@ public class TransactionList {
      * Displays a report of all transactions with a specified vendor.
      */
     public void searchByVendor(String vendorToSearch) {
-        System.out.println("\n•··· Vendor Search Results ···•");
-
         //collect matching results into list to check if empty
         List<Transaction> matchingTransactions = transactions.stream()
                 //filters based on: matching vendor
@@ -263,7 +243,7 @@ public class TransactionList {
         else { //print results only if there are matching transactions
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
-                    .forEach(t -> System.out.println("> " + t));
+                    .forEach(System.out::println);
         }
     }
 
@@ -274,8 +254,6 @@ public class TransactionList {
      */
     public void customSearch(LocalDate startDate, LocalDate endDate, String description,
                              String vendor, String depositOrPayment, double minAmount, double maxAmount) {
-        System.out.println("\n•··· Custom Search Results···•");
-
         Stream<Transaction> tempStream = transactions.stream();
 
         // --> for each if statement, checks if user left "blank" by checking default values
@@ -328,7 +306,7 @@ public class TransactionList {
         else { //print results only if there are matching transactions
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
-                    .forEach(t -> System.out.println("> " + t));
+                    .forEach(System.out::println);
         }
 
     }
