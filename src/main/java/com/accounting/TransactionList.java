@@ -27,7 +27,7 @@ public class TransactionList {
     public void addTransaction(String description, String vendor, double amount) {
         Transaction t = new Transaction(LocalDateTime.now(), description, vendor, amount);
         transactions.add(t);
-        System.out.println("\nThe following transaction has been added:\n" + t);
+        System.out.println("\nThe following transaction has been added:\n" + t.toDescriptiveString());
     }
 
     // *** FILE I/O METHODS ***

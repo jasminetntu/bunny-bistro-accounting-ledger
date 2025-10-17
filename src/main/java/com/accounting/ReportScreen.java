@@ -28,19 +28,19 @@ public class ReportScreen {
                        ∩_∩
                      („• •„)
                     •··U U·············•··················•""" +
-                    util.boldString("\n\t\t\t\tReports") +
+                    util.boldString("\n\t\t\t\tReports 📚") +
                     """
                     
                     •··················•··················•
                     Run report from...
-                        (1) Month To Date
-                        (2) Previous Month
-                        (3) Year To Date
-                        (4) Previous Year
-                        (5) Search by Vendor
-                        (6) Custom Search
+                        (1) 🐰 Month To Date
+                        (2) 🐰 Previous Month
+                        (3) 🍵 Year To Date
+                        (4) 🍵 Previous Year
+                        (5) 🍀 Search by Vendor
+                        (6) 🍀 Custom Search
                     
-                        (0) Back to Ledger
+                        (0) 📝 Back to Ledger
                     > Enter choice (0-6):\s""");
 
             try {
@@ -90,7 +90,7 @@ public class ReportScreen {
                 }
             }
             catch (IllegalArgumentException e) {
-                System.out.println("Invalid menu choice. Please enter a number between 0-6.");
+                System.out.println("❌ Invalid menu choice. Please enter a number between 0-6.");
             }
             catch (InterruptedException e) {
                 System.out.println("Error encountered: Interrupted exception.");
@@ -177,7 +177,7 @@ public class ReportScreen {
                 isValid = true;
             }
             else { //invalid input
-                System.out.println("Invalid option. Please input D or P or press enter.");
+                System.out.println("❌ Invalid option. Please input D or P or press enter.");
             }
         }
 
@@ -195,7 +195,7 @@ public class ReportScreen {
                     minAmount = Double.parseDouble(input);
 
                     if (minAmount < 0) {
-                        System.out.println("Invalid amount. Please enter a nonnegative number.");
+                        System.out.println("❌ Invalid amount. Please enter a nonnegative number.");
                     }
                     else {
                         isValid = true;
@@ -203,7 +203,7 @@ public class ReportScreen {
                 }
             }
             catch (Exception e) {
-                System.out.println("Invalid amount. Please enter a nonnegative number.");
+                System.out.println("❌ Invalid amount. Please enter a nonnegative number.");
             }
         }
 
@@ -221,7 +221,7 @@ public class ReportScreen {
                     maxAmount = Double.parseDouble(input);
 
                     if (maxAmount < 0) {
-                        System.out.println("Invalid amount. Please enter a nonnegative number.");
+                        System.out.println("❌ Invalid amount. Please enter a nonnegative number.");
                     }
                     else {
                         isValid = true;
@@ -229,7 +229,7 @@ public class ReportScreen {
                 }
             }
             catch (Exception e) {
-                System.out.println("Invalid amount. Please enter a nonnegative number.");
+                System.out.println("❌ Invalid amount. Please enter a nonnegative number.");
             }
         }
 

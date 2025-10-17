@@ -26,16 +26,16 @@ public class HomeScreen {
                        ∩_∩
                      („• •„)
                     •··U U·············•··················•""" +
-                    util.boldString("\n\t\t\t\tHome") +
+                    util.boldString("\n\t\t\t\tHome 🌸") +
                     """
                     
                     •··················•··················•
                     What would you like to do?
-                        (D) Add Deposit
-                        (P) Make Payment (Debit)
-                        (L) View Ledger
+                        (D) 🍀 Add Deposit
+                        (P) 🍵 Make Payment (Debit)
+                        (L) 📝 View Ledger
                     
-                        (X) Exit
+                        (X) 👋 Exit
                     > Enter choice (D, P, L, X):\s""");
 
             try {
@@ -70,7 +70,7 @@ public class HomeScreen {
                 }
             }
             catch (IllegalArgumentException e) {
-                System.out.println("Invalid menu choice. Please enter D, P, L, or X.");
+                System.out.println("❌ Invalid menu choice. Please enter D, P, L, or X.");
             }
             catch (InterruptedException e) {
                 System.out.println("Error encountered: Interrupted exception.");
@@ -122,9 +122,15 @@ public class HomeScreen {
 
             try {
                 amount = Double.parseDouble(scnr.nextLine());
-                isValid = true;
+
+                if (amount < 0) {
+                    System.out.println("❌ Invalid amount. Must be a positive number.");
+                }
+                else {
+                    isValid = true;
+                }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid amount. Try again.");
+                System.out.println("❌ Invalid amount. Must be a positive number.");
             }
         }
 
@@ -150,10 +156,17 @@ public class HomeScreen {
             System.out.print("Enter payment $ amount: ");
 
             try {
-                amount = -1 * Double.parseDouble(scnr.nextLine());
-                isValid = true;
+                amount = Double.parseDouble(scnr.nextLine());
+
+                if (amount < 0) {
+                    System.out.println("❌ Invalid amount. Must be a positive number.");
+                }
+                else {
+                    amount *= -1;
+                    isValid = true;
+                }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid amount. Try again.");
+                System.out.println("❌ Invalid amount. Must be a positive number.");
             }
         }
 

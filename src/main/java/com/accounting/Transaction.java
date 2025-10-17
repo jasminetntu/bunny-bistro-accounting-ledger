@@ -138,6 +138,36 @@ public class Transaction {
     }
 
     /**
+     * Returns a string in the following format for a descriptive version:
+     * 🌱 MMM dd, yyyy | hh:mm:ss a
+     *      > Description: {description}
+     *      > Vendor: {vendor}
+     *      > Amount: +/-${amount}
+     *
+     * @return A descriptive String of the transaction details.
+     */
+    public String toDescriptiveString() {
+        //get formatted amount based on deposit or payment
+        String formatAmount;
+        if (amount < 0) { //payment
+            formatAmount = String.format("-$%.2f", amount * -1);
+        }
+        else { //deposit
+            formatAmount = String.format("+$%.2f", amount);
+        }
+
+        //return formatted string
+        return String.format("""
+                        🌱 %s | %s
+                            > Description: %s
+                            > Vendor: %s
+                            > Amount: %s""",
+                getDate().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")),
+                getTime().format(DateTimeFormatter.ofPattern("h:mm:ss a")),
+                description, vendor, formatAmount);
+    }
+
+    /**
      * Returns a string in the following format for CSV file:
      * date|time|description|vendor|amount
      *

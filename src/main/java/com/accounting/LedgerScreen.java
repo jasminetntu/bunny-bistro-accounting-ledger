@@ -26,17 +26,17 @@ public class LedgerScreen {
                        ∩_∩
                      („• •„)
                     •··U U·············•··················•""" +
-                    util.boldString("\n\t\t\t\tLedger") +
+                    util.boldString("\n\t\t\t\tLedger 📝") +
                     """
                     
                     •··················•··················•
                     Display...
-                        (A) All Transactions
-                        (D) Deposits
-                        (P) Payments
-                        (R) Reports
+                        (A) 💰All Transactions
+                        (D) 💵 Deposits
+                        (P) 💸 Payments
+                        (R) 📚 Reports
                     
-                        (H) Back to Home
+                        (H) 🌸 Back to Home
                     > Enter choice (A, D, P, R, H):\s""");
 
             try {
@@ -76,10 +76,10 @@ public class LedgerScreen {
                 }
             }
             catch (IllegalArgumentException e) {
-                System.out.println("Invalid menu choice. Please enter A, D, P, R, or H.");
+                System.out.println("❌ Invalid menu choice. Please enter A, D, P, R, or H.");
             }
             catch (InterruptedException e) {
-                System.out.println("Error encountered: Interrupted exception.");
+                System.out.println("❌ Error encountered: Interrupted exception.");
             }
         } //end while
 
