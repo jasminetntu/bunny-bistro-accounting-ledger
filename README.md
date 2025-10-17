@@ -79,20 +79,20 @@ src/
 ## 📸 Screenshots
 
 ### .☘︎ ݁˖ Home Screen
-<img width="323" height="396" alt="image" src="https://github.com/user-attachments/assets/6c794285-0d25-45a7-bf66-cd0107d53b52" />
+<img width="329" height="420" alt="image" src="https://github.com/user-attachments/assets/bd0f2f18-ab2f-4b82-8810-e70c703f0320" />
 
 ### .☘︎ ݁˖ Ledger Screen
-<img width="323" height="367" alt="image" src="https://github.com/user-attachments/assets/906f7dbb-e17b-4ec4-a24f-c802103cf6b2" />
+<img width="329" height="358" alt="image" src="https://github.com/user-attachments/assets/754ecbb6-9f14-441b-883f-8920d62dec66" />
 
 ### .☘︎ ݁˖ Report Screen
-<img width="323" height="400" alt="image" src="https://github.com/user-attachments/assets/68dfcdca-7588-412a-abd8-62d9b0aea11f" />
+<img width="329" height="409" alt="image" src="https://github.com/user-attachments/assets/bbdb24e4-3457-430e-9f10-66058c4f861c" />
 
 ### .☘︎ ݁˖ Display Example (Payments)
-<img width="410" height="596" alt="image" src="https://github.com/user-attachments/assets/22a0e5c2-1602-4b57-a6c3-9b5468129fc5" />
+<img width="831" height="319" alt="image" src="https://github.com/user-attachments/assets/853646b1-4a1c-43b2-b86c-376dff351beb" />
 
 ### .☘︎ ݁˖ Report Example (Custom Search)
-<img width="609" height="688" alt="image" src="https://github.com/user-attachments/assets/8be6be42-3b5f-4d0a-b3b8-86d9a6c3c201" />
+<img width="831" height="516" alt="image" src="https://github.com/user-attachments/assets/8851506b-234f-42a4-8b6f-7139202fbbc1" />
 
-### CSV File
+### CSV File Example
 <img width="714" height="252" alt="image" src="https://github.com/user-attachments/assets/a659c9ab-f46d-4c61-8dcb-f178bdc009d4" />
 
