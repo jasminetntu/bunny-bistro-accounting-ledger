@@ -208,7 +208,7 @@ public class TransactionList {
      */
     public void reportPreviousYear() {
         LocalDate first_day_of_prev_year = LocalDate.of(LocalDate.now().getYear() - 1, 1, 1);
-        LocalDate last_day_of_prev_year = LocalDate.of(LocalDate.now().getYear() - 1, 1, 31);
+        LocalDate last_day_of_prev_year = LocalDate.of(LocalDate.now().getYear() - 1, 12, 31);
 
         //collect matching results into list to check if empty
         List<Transaction> matchingTransactions = transactions.stream()
