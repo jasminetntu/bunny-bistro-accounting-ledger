@@ -29,11 +29,17 @@ public class TransactionList {
         System.out.println("\nThe following transaction has been added:\n" + t.toDescriptiveString());
     }
 
+    /**
+     * Calls loadFromCsv() method to fill transactions.
+     */
     public void getTransactionsFromFile() {
         CSVFileManager csvFileManager = new CSVFileManager();
         transactions = csvFileManager.loadFromCsv();
     }
 
+    /**
+     * Calls saveToCsv() method to save transactions.
+     */
     public void saveTransactionsToFile() {
         CSVFileManager csvFileManager = new CSVFileManager();
         csvFileManager.saveToCsv(transactions);
