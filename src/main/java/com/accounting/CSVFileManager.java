@@ -8,6 +8,10 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
 public class CSVFileManager {
     final String FILE_PATH = "src/main/resources/transactions.csv";
 
@@ -30,7 +34,7 @@ public class CSVFileManager {
 
             while ((currLine = br.readLine()) != null) {
                 lineCount++;
-                tranDetails = currLine.split("\\|", 5);
+                tranDetails = currLine.split("\"\\|\"", 5);
 
                 try {
                     //check if current line is valid transaction
