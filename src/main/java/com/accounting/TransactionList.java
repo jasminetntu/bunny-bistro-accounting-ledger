@@ -3,12 +3,11 @@ package com.accounting;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Stream;
 
 public class TransactionList {
-    private final List<Transaction> transactions = new ArrayList<>();
+    private List<Transaction> transactions = new ArrayList<>();
 
     /**
      * Comparator that sorts by most recent, used in all display & report methods.
@@ -30,51 +29,14 @@ public class TransactionList {
         System.out.println("\nThe following transaction has been added:\n" + t.toDescriptiveString());
     }
 
-    // *** FILE I/O METHODS ***
-
-    /**
-     * Loads transactions from CSV file to arraylist of transactions
-     * @param filePath path to CSV file
-     */
-    public void loadFromCsv(String filePath) {
-        transactions.clear(); //reset to load new
-
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String currLine;
-            String[] tranDetails;
-            br.readLine(); //clear header line
-
-            while ((currLine = br.readLine()) != null) {
-                tranDetails = currLine.split("\\|", 5);
-
-                //check if current line is valid transaction
-                if (tranDetails.length == 5) {
-                    // date|time|description|vendor|amount
-                    // store date & time as LocalDateTime
-                    transactions.add(new Transaction(LocalDateTime.of(LocalDate.parse(tranDetails[0]), LocalTime.parse(tranDetails[1])),
-                            tranDetails[2], tranDetails[3], Double.parseDouble(tranDetails[4])));
-                }
-            }
-        }
-        catch (IOException ignore) {} //occurs if file is empty -> ignore to leave transactions empty
+    public void getTransactionsFromFile() {
+        CSVFileManager csvFileManager = new CSVFileManager();
+        transactions = csvFileManager.loadFromCsv();
     }
 
-    /**
-     * Saves arraylist of transactions to CSV file in following format:
-     * date|time|description|vendor|amount
-     * @param filePath path to CSV file
-     */
-    public void saveToCsv(String filePath) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
-            bw.write("date|time|description|vendor|amount\n");
-
-            for (Transaction t : transactions) {
-                bw.write(t.toCsvString() + "\n");
-            }
-        }
-        catch (IOException e) {
-            System.out.println("ERROR: Something went wrong while saving to file.");
-        }
+    public void saveTransactionsToFile() {
+        CSVFileManager csvFileManager = new CSVFileManager();
+        csvFileManager.saveToCsv(transactions);
     }
 
     // *** DISPLAY METHODS ***

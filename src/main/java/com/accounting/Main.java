@@ -11,15 +11,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // variables & constants
-        final String FILE_PATH = "src/main/resources/transactions.csv";
-
+        // variables
         Scanner scnr = new Scanner(System.in);
         TransactionList transactionList = new TransactionList();
         Utility util = new Utility();
 
         //load CSV file of transactions
-        transactionList.loadFromCsv(FILE_PATH);
+        transactionList.getTransactionsFromFile();
 
         //title
         System.out.println("•·················•·················•" +
@@ -32,7 +30,7 @@ public class Main {
         hs.showHome(scnr, transactionList, util);
 
         //save new transactions when exited
-        transactionList.saveToCsv(FILE_PATH);
+        transactionList.saveTransactionsToFile();
         scnr.close();
     }
 }
