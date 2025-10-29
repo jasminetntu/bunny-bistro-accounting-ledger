@@ -9,7 +9,7 @@
 An accounting ledger app interactable through the console, designed for a fictional cafe named "Bunny Bistro."
 This tool helps the cafe efficiently track their financial activity.
 
-Built entirely in Java to practice application development, specifically to gain familiarity with streams and enums.
+Built entirely in Java to practice application development, specifically to gain familiarity with streams, enums, file structure, and robust error-handling.
 
 ### 🗝️ Key Features
 
@@ -79,20 +79,21 @@ src/
 ## 📸 Screenshots
 
 ### .☘︎ ݁˖ Home Screen
-<img width="329" height="420" alt="image" src="https://github.com/user-attachments/assets/bd0f2f18-ab2f-4b82-8810-e70c703f0320" />
+<img width="329" height="420" alt="home screen screenshot" src="https://github.com/user-attachments/assets/bd0f2f18-ab2f-4b82-8810-e70c703f0320" />
 
 ### .☘︎ ݁˖ Ledger Screen
-<img width="329" height="358" alt="image" src="https://github.com/user-attachments/assets/754ecbb6-9f14-441b-883f-8920d62dec66" />
+<img width="329" height="358" alt="ledger screen screenshot" src="https://github.com/user-attachments/assets/754ecbb6-9f14-441b-883f-8920d62dec66" />
 
 ### .☘︎ ݁˖ Report Screen
-<img width="329" height="409" alt="image" src="https://github.com/user-attachments/assets/bbdb24e4-3457-430e-9f10-66058c4f861c" />
+<img width="329" height="409" alt="report screen screenshot" src="https://github.com/user-attachments/assets/bbdb24e4-3457-430e-9f10-66058c4f861c" />
 
 ### .☘︎ ݁˖ Display Example (Payments)
-<img width="831" height="319" alt="image" src="https://github.com/user-attachments/assets/853646b1-4a1c-43b2-b86c-376dff351beb" />
+<img width="839" height="397" alt="display all payments screenshot" src="https://github.com/user-attachments/assets/353efa6a-eab9-4ccb-a00f-9a0b5bdae7ec" />
 
 ### .☘︎ ݁˖ Report Example (Custom Search)
-<img width="831" height="516" alt="image" src="https://github.com/user-attachments/assets/8851506b-234f-42a4-8b6f-7139202fbbc1" />
+<img width="833" height="602" alt="image" src="https://github.com/user-attachments/assets/9c46c028-bf8d-48ed-bead-d308ff6c13d5" />
 
-### CSV File Example
-<img width="714" height="252" alt="image" src="https://github.com/user-attachments/assets/a659c9ab-f46d-4c61-8dcb-f178bdc009d4" />
+### .☘︎ ݁˖ CSV File Example
+<img width="793" height="562" alt="starter csv file screenshot" src="https://github.com/user-attachments/assets/284a6721-019c-4603-9ecc-82c2a86e08d1" />
+
 
