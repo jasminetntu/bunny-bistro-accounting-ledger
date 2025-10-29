@@ -55,9 +55,12 @@ public class TransactionList {
             System.out.println("No transactions found.");
         }
         else {
+            //print transactions in a table
             transactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
                     .forEach(System.out::println);
+
+            displayAllTotals(transactions);
         }
     }
 
@@ -78,6 +81,12 @@ public class TransactionList {
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
                     .forEach(System.out::println);
+
+            double total = 0;
+            for (Transaction t : matchingTransactions) {
+                total += t.getAmount();
+            }
+            System.out.printf("\n📈 Total: +$%.2f\n", total);
         }
     }
 
@@ -98,6 +107,12 @@ public class TransactionList {
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
                     .forEach(System.out::println);
+
+            double total = 0;
+            for (Transaction t : matchingTransactions) {
+                total += Math.abs(t.getAmount());
+            }
+            System.out.printf("\n📉 Total: -$%.2f\n", total);
         }
     }
 
@@ -122,6 +137,8 @@ public class TransactionList {
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
                     .forEach(System.out::println);
+
+            displayAllTotals(matchingTransactions);
         }
     }
 
@@ -146,6 +163,8 @@ public class TransactionList {
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
                     .forEach(System.out::println);
+
+            displayAllTotals(matchingTransactions);
         }
     }
 
@@ -168,6 +187,8 @@ public class TransactionList {
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
                     .forEach(System.out::println);
+
+            displayAllTotals(matchingTransactions);
         }
     }
 
@@ -192,6 +213,8 @@ public class TransactionList {
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
                     .forEach(System.out::println);
+
+            displayAllTotals(matchingTransactions);
         }
     }
 
@@ -212,6 +235,8 @@ public class TransactionList {
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
                     .forEach(System.out::println);
+
+            displayAllTotals(matchingTransactions);
         }
     }
 
@@ -275,7 +300,54 @@ public class TransactionList {
             matchingTransactions.stream()
                     .sorted(SORT_BY_MOST_RECENT)
                     .forEach(System.out::println);
+
+            displayAllTotals(matchingTransactions);
         }
 
+    }
+
+    // *** HELPER METHODS ***
+
+    /**
+     * Displays the total number of deposits/payments, total amounts, and overall income.
+     * @param transToDisplay a list of filtered Transactions to display the total of
+     */
+    private void displayAllTotals(List<Transaction> transToDisplay) {
+        //determine total earnings & payments
+        int numDeposits = 0;
+        int numPayments = 0;
+        double revenue = 0;
+        double expenses = 0;
+
+        //calculate totals
+        for (Transaction t : transToDisplay) {
+            if (t.getAmount() > 0) {
+                numDeposits += 1;
+                revenue += t.getAmount();
+            }
+            else {
+                numPayments += 1;
+                expenses += Math.abs(t.getAmount());
+            }
+        }
+
+        //get formatted net income based on positive or negative amount
+        String formatNetIncome;
+        if (revenue - expenses < 0) { //payment
+            formatNetIncome = String.format("-$%.2f", Math.abs(revenue - expenses));
+        }
+        else { //deposit
+            formatNetIncome = String.format("+$%.2f", revenue - expenses);
+        }
+
+        //print results
+        System.out.printf("""
+                
+                🍵 Based on current view...
+                    · 📈 Total revenue  (%d): +$%.2f
+                    · 📉 Total expenses (%d): -$%.2f
+                    · 💰 Net income: %s
+                """,
+                numDeposits, revenue, numPayments, expenses, formatNetIncome);
     }
 }
