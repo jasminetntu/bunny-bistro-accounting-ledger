@@ -21,46 +21,44 @@ public class CSVFileManager {
      */
     public List<Transaction> loadFromCsv() {
         List<Transaction> transactions = new ArrayList<>();
-        int lineCount = 1;
+
+        CSVFormat format = CSVFormat.DEFAULT
+                .builder()
+                .setDelimiter('|')     // field separator
+                .setQuote('"')         // quote character
+                .setCommentMarker('#') // comment character
+                .setIgnoreEmptyLines(true)
+                .setIgnoreSurroundingSpaces(true)
+                .setHeader()
+                .setSkipHeaderRecord(true)
+                .get();
 
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
-            String currLine;
-            String[] tranDetails;
-            String fileIsNotEmpty = br.readLine(); //clear header line and check if empty
+            CSVParser parser = format.parse(br);
 
-            if (fileIsNotEmpty == null) { //throw error if file is empty
-                throw new IOException("Error: File is empty. No data to be loaded.");
-            }
-
-            while ((currLine = br.readLine()) != null) {
-                lineCount++;
-                tranDetails = currLine.split("\"\\|\"", 5);
-
-                try {
-                    //check if current line is valid transaction
-                    if (tranDetails.length == 5) {
-                        // date|time|description|vendor|amount
-                        // store date & time as LocalDateTime
-
-                        transactions.add(new Transaction(LocalDateTime.of(LocalDate.parse(tranDetails[0]), LocalTime.parse(tranDetails[1])),
-                                tranDetails[2], tranDetails[3], Double.parseDouble(tranDetails[4])));
-                    } else { //throw error is line is invalid
-                        throw new IOException("Error: Line " + lineCount + " must have 5 fields.");
+            if (!parser.iterator().hasNext()) {
+                System.out.println("Error: The CSV file is empty or contains only a header.");
+            } else {
+                for (CSVRecord record : parser) {
+                    try {
+                        if (record.size() == 5) {
+                            transactions.add(new Transaction(LocalDateTime.of(LocalDate.parse(record.get("date")), LocalTime.parse(record.get("time"))),
+                                    record.get("description"), record.get("vendor"), Double.parseDouble(record.get("amount"))));
+                        } else { //throw error is line is invalid
+                            throw new IOException("Error: Line " + parser.getCurrentLineNumber() + " must have 5 fields.");
+                        }
+                    } catch (IOException e) {  //catch if line has wrong number of field
+                        System.out.println(e.getMessage());
+                    } catch (DateTimeParseException e) { //catch incorrect date/time format
+                        System.out.println("Error: Date or time is not correctly formatted on line " + parser.getCurrentLineNumber());
+                    } catch (NumberFormatException e) { //catch invalid price
+                        System.out.println("Error: Price is not numeric on line " + parser.getCurrentLineNumber());
                     }
-                }
-                catch (IOException e) {  //catch if line has wrong number of field
-                    System.out.println(e.getMessage());
-                }
-                catch (DateTimeParseException e) { //catch incorrect date/time format
-                    System.out.println("Error: Date or time is not correctly formatted on line " + lineCount);
-                }
-                catch (NumberFormatException e) { //catch invalid price
-                    System.out.println("Error: Price is not numeric on line " + lineCount);
                 }
             }
         }
-        catch (IOException e) {  //catch empty file error
-            System.out.println(e.getMessage());
+        catch (IOException e) {
+            System.out.println("Error: Unable to read CSV file.");
         }
 
         return transactions;
