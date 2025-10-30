@@ -3,14 +3,23 @@ date|time|description|vendor|amount
 "2025-08-27"|"13:15:14"|"August Sales Deposit"|"Bank of Bunnica"|"3503.75"
 "2025-09-08"|"19:14:53"|"Utility Payment"|"Flower Power Energy"|"-225.50"
 "2025-09-27"|"07:08:32"|"September Sales Deposit"|"Bank of Bunnica"|"4370.29"
-"a"|"b"|"Testing wrong number of fields"
+
+# Testing wrong number of fields
+"2025-09-29"|"10:15:10"|"Some description"
+
 "2025-09-30"|"17:32:15"|"Refund Customer"|"Judy Hopps"|"-12.57"
 "2025-10-10"|"09:45:50"|"Event Pop-Up Sales"|"Bites & Brews Market"|"561.48"
 "2025-10-14"|"12:52:38"|"Utility Payment"|"Flower Power Energy"|"-225.50"
 "2025-10-14"|"16:32:00"|"Inventory Restock (Matcha Powder)"|"Marukyu Koyamaen"|"-310.00"
-"2025/10/15"|"12:00:25"|"Testing wrong date format"|"Some vendor"|"100.00"
+
+# Testing wrong date format
+"2025/10/15"|"12:00:25"|"Some description"|"Some vendor"|"100.00"
+
 "2025-10-15"|"09:15:55"|"Barista Wages"|"Bunny Bistro Staff"|"-3500.00"
 "2025-10-16"|"10:32:25"|"Repair Espresso Machine"|"B.I.T."|"-85.00"
 "2025-10-17"|"11:06:10"|"October Sales Deposit"|"Bank of Bunnica"|"6000.00"
+
+# Testing invalid price
+"2025-10-20"|"16:50:20"|"Event Pop-Up Sales"|"Bites & Brews Market"|"one thousand dollars"
+
 "2025-10-17"|"11:06:39"|"Barista Wages"|"Bunny Bistro Staff"|"-2500.00"
-"2025-10-20"|"16:50:20"|"Testing invalid price"|"Bites & Brews Market"|"one thousand dollars"

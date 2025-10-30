@@ -175,11 +175,11 @@ public class Transaction {
      */
     public String toCsvString() {
         StringBuilder sb = new StringBuilder();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd\"|\"HH:mm:ss");
 
         //append in 24-hour time for clarity when reading file
-        sb.append(formatter.format(dateAndTime)).append("|").append(description).append("|")
-                .append(vendor).append(String.format("|%.2f", amount));
+        sb.append("\"").append(formatter.format(dateAndTime)).append("\"|\"").append(description).append("\"|\"")
+                .append(vendor).append(String.format("\"|\"%.2f\"", amount));
 
         return sb.toString();
     }

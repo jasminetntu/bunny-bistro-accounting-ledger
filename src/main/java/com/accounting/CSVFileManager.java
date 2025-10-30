@@ -42,17 +42,26 @@ public class CSVFileManager {
                 for (CSVRecord record : parser) {
                     try {
                         if (record.size() == 5) {
-                            transactions.add(new Transaction(LocalDateTime.of(LocalDate.parse(record.get("date")), LocalTime.parse(record.get("time"))),
-                                    record.get("description"), record.get("vendor"), Double.parseDouble(record.get("amount"))));
-                        } else { //throw error is line is invalid
+                            transactions.add(
+                                    new Transaction(LocalDateTime.of(LocalDate.parse(record.get("date")), LocalTime.parse(record.get("time"))),
+                                    record.get("description"), record.get("vendor"), Double.parseDouble(record.get("amount"))
+                                    ));
+                        }
+                        else { //throw error if line is invalid
                             throw new IOException("Error: Line " + parser.getCurrentLineNumber() + " must have 5 fields.");
                         }
-                    } catch (IOException e) {  //catch if line has wrong number of field
+                    }
+                    catch (IOException e) {  //catch if line has wrong number of field
                         System.out.println(e.getMessage());
-                    } catch (DateTimeParseException e) { //catch incorrect date/time format
+                    }
+                    catch (DateTimeParseException e) { //catch incorrect date/time format
                         System.out.println("Error: Date or time is not correctly formatted on line " + parser.getCurrentLineNumber());
-                    } catch (NumberFormatException e) { //catch invalid price
+                    }
+                    catch (NumberFormatException e) { //catch invalid price
                         System.out.println("Error: Price is not numeric on line " + parser.getCurrentLineNumber());
+                    }
+                    catch (Exception e) {
+                        System.out.println("Error: UNKNOWN");
                     }
                 }
             }
